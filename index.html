@@ -1,0 +1,2287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="icon" href="logo.svg">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#1D2720">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>takayna 2027 — Jess</title>
+<style>
+:root{
+  color-scheme:dark;
+  --page:#1D2720;
+  --surface:#2A352D;
+  --surface2:#222C25;
+  --ink:#F2EEE3;
+  --ink2:#C9CDC2;
+  --muted:#8C968C;
+  --grid:#33403A;
+  --axis:#46544C;
+  --border:rgba(255,255,255,.07);
+  --brand:#B7683A;
+  --brand2:#D6834E;
+  --branddeep:#8A4A26;
+  --s1:#D6834E;
+  --s2:#5FA8A0;
+  --s3:#7DB77A;
+  --z1:#F0D3B8;
+  --z2:#D6834E;
+  --z3:#8A4A26;
+  --good:#6DBE7A;
+  --warn:#E2B94A;
+  --serious:#E08A5C;
+  --crit:#D9534F;
+  --goodtext:#7BCB87;
+  --night:#8E7CF0;
+  --card1:#2B362E;
+  --card2:#25302A;
+  --timer1:#33413A;
+  --toastbg:#2B362E;
+  --brandrgb:183,104,58;
+  --glow:#3A4A3F;
+  --page2:#242E27;
+  --barend:#A85A2E;
+  --navrgb:29,39,32;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--page)}
+body{font-family:-apple-system,system-ui,"Segoe UI",sans-serif;color:var(--ink);font-size:15px;line-height:1.45;padding-bottom:78px;
+  background:radial-gradient(120% 60% at 50% -10%, var(--glow) 0%, var(--page2) 45%, var(--page) 100%) fixed}
+header{padding:18px 18px 6px;display:flex;gap:12px;align-items:center;max-width:880px;margin:0 auto}
+header .mark{width:42px;height:42px;border-radius:11px;flex:none;box-shadow:0 4px 16px rgba(var(--brandrgb),.28)}
+header h1{font-size:15px;font-weight:800;letter-spacing:.14em}
+header h1 span{color:var(--brand)}
+header .tag{font-size:11px;color:var(--muted);letter-spacing:.04em;font-weight:600}
+header .count{margin-left:auto;text-align:right}
+header .count b{display:block;font-size:30px;font-weight:800;line-height:1;font-variant-numeric:tabular-nums;
+  background:linear-gradient(135deg,var(--brand2),var(--brand));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+header .count span{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;font-weight:700}
+.chips{padding:8px 18px 10px;display:flex;gap:6px;flex-wrap:wrap;max-width:880px;margin:0 auto}
+.chip{font-size:11.5px;font-weight:600;padding:4px 11px;border-radius:99px;border:1px solid var(--border);background:rgba(255,255,255,.04);color:var(--ink2)}
+.chip.acc{border-color:rgba(var(--brandrgb),.5);color:var(--brand2);background:rgba(var(--brandrgb),.10)}
+nav{position:fixed;bottom:0;left:0;right:0;display:flex;background:rgba(var(--navrgb),.85);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
+  border-top:1px solid var(--border);z-index:50;padding-bottom:env(safe-area-inset-bottom)}
+nav button{flex:1;padding:9px 0 7px;border:0;background:none;color:var(--muted);font-size:9.5px;font-weight:700;letter-spacing:.03em;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;gap:3px}
+nav button svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+nav button.on{color:var(--brand)}
+main{max-width:880px;margin:0 auto;padding:4px 14px 24px}
+.card{background:linear-gradient(180deg,var(--card1) 0%,var(--card2) 100%);border:1px solid var(--border);border-radius:20px;padding:17px;margin-bottom:13px;
+  box-shadow:0 10px 30px rgba(0,0,0,.32)}
+.card h2{font-size:11.5px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.09em;margin-bottom:10px}
+.card h3{font-size:17px;font-weight:700;margin-bottom:4px;letter-spacing:-.01em}
+.pill{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.06em;padding:2px 9px;border-radius:99px;margin:0 6px 6px 0}
+.pill.night{background:rgba(142,124,240,.16);color:var(--night);border:1px solid rgba(142,124,240,.4)}
+.pill.test{background:rgba(var(--brandrgb),.14);color:var(--brand2);border:1px solid rgba(var(--brandrgb),.45)}
+.pill.race{background:rgba(229,72,77,.15);color:#FF7B80;border:1px solid rgba(229,72,77,.5)}
+.pill.down{background:rgba(255,255,255,.06);color:var(--ink2);border:1px solid var(--border)}
+.pill.done{background:rgba(47,194,79,.15);color:var(--goodtext);border:1px solid rgba(47,194,79,.45)}
+.pill.loc{background:rgba(255,255,255,.06);color:var(--ink2);border:1px solid var(--border)}
+.locwrap{display:flex;gap:6px;align-items:center;margin-top:8px;flex-wrap:wrap}
+.locwrap .lbl{font-size:10px;font-weight:800;letter-spacing:.06em;color:var(--muted)}
+.locbtn{font-size:11px;font-weight:700;padding:6px 12px;border-radius:99px;cursor:pointer;
+  background:transparent;color:var(--ink2);border:1px solid var(--border)}
+.locbtn.on{background:var(--brand2);border-color:var(--brand2);color:#fff}
+.locwrap{margin:10px 0 0}
+.locbtn{font-size:13px;font-weight:700;padding:9px 16px}
+.brief{margin:10px 0 4px;padding:12px 14px;border-radius:12px;
+  background:rgba(var(--brandrgb),.10);border:1px solid rgba(var(--brandrgb),.35);
+  color:var(--ink);font-size:15px;font-weight:600;line-height:1.45}
+.fullpres{margin-top:8px}
+.fullpres summary{cursor:pointer;font-size:11px;font-weight:800;letter-spacing:.06em;color:var(--muted)}
+.fullpres .pres{margin-top:8px}
+.hrnote{margin:8px 0 4px;padding:12px 14px;border-radius:12px;
+  background:rgba(229,72,77,.10);border:1px solid rgba(229,72,77,.32)}
+.hrnote .hrlbl{display:block;font-size:10px;font-weight:800;letter-spacing:.08em;color:#FF7B80;margin-bottom:6px}
+.hrnote p{margin:0;font-size:14px;line-height:1.45;color:var(--ink)}
+.hrwhy{margin-top:8px}
+.hrwhy summary{cursor:pointer;font-size:11px;font-weight:700;color:var(--muted)}
+.rtnote{margin:10px 0 4px;padding:12px 14px;border-radius:12px;display:flex;gap:12px;align-items:flex-start;
+  background:rgba(74,147,229,.10);border:1px solid rgba(74,147,229,.32)}
+.rtnote .rtico{font-size:20px;line-height:1.1}
+.rtnote .rtlbl{display:block;font-size:10px;font-weight:800;letter-spacing:.08em;color:#8FC0F2;margin-bottom:4px}
+.rtnote b{display:block;font-size:15px;color:var(--ink);margin-bottom:4px}
+.rtnote p{margin:0;font-size:14px;line-height:1.45;color:var(--ink2)}
+.rtcard{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--border)}
+.rtcard:first-of-type{border-top:0}
+.rtcard .rtico{font-size:22px;line-height:1.1}
+.rtcard b{display:block;font-size:14px;color:var(--ink)}
+.rtcard p{margin:2px 0 0;font-size:13px;line-height:1.45;color:var(--ink2)}
+.hrwhy p{margin-top:6px;font-size:12px;color:var(--ink2)}
+.cthead{margin:2px 2px 14px}
+.cthead h2{font-size:22px;margin:2px 0 4px;letter-spacing:-.01em}
+.cthead p{margin:0;font-size:13px;color:var(--muted)}
+.ctsec{margin:18px 0 0}
+.ctlbl{display:block;font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--brand2);margin:0 2px 9px}
+.ctshot{display:flex;gap:11px;align-items:flex-start;background:var(--card);border:1px solid var(--border);
+  border-radius:11px;padding:11px 13px;margin-bottom:7px}
+.ctshot input{margin:3px 0 0;flex:none;width:17px;height:17px;accent-color:var(--brand2)}
+.ctshot span{font-size:14px;line-height:1.45}
+.ctshot.done span{color:var(--muted);text-decoration:line-through}
+.cttalk{background:var(--card);border-left:3px solid var(--brand2);border-radius:0 11px 11px 0;
+  padding:12px 15px;margin-bottom:8px;font-size:14px;line-height:1.5}
+.ctlog{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:13px 15px;margin-bottom:8px}
+.ctlog b{display:block;font-size:14px;margin-bottom:5px}
+.ctlog p{margin:0;font-size:13px;color:var(--ink2);line-height:1.5}
+.syncbar{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  margin:-4px 0 13px;padding:9px 12px;border-radius:11px;background:rgba(74,147,229,.10);
+  border:1px solid rgba(74,147,229,.30);font-size:12.5px;color:var(--ink2);line-height:1.45}
+.syncbar>span{min-width:0}
+.syncbar.warn{background:rgba(224,168,58,.12);border-color:rgba(224,168,58,.40);color:#F0C877}
+.syncbar button{flex:0 0 auto;font-size:12px;padding:6px 12px;white-space:nowrap}
+.ctnone{color:var(--muted);font-size:14px;padding:20px 2px;line-height:1.55}
+.briefl{display:inline-block;font-size:14px;font-weight:700;color:#fff;text-decoration:none;background:var(--brand2);padding:11px 18px;border-radius:99px;margin:0 8px 8px 0}
+.briefl.alt{background:transparent;color:var(--brand2);border:1px solid var(--brand2)}
+.pres{font-size:14px;color:var(--ink2);white-space:pre-wrap;margin:7px 0}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+button.btn{background:linear-gradient(135deg,#FF6A2F,#E8430E);color:#fff;border:0;border-radius:12px;padding:10px 16px;font-size:14px;font-weight:700;cursor:pointer;
+  box-shadow:0 4px 16px rgba(var(--brandrgb),.30)}
+button.btn:active{transform:scale(.97)}
+button.btn:disabled{opacity:.4;box-shadow:none}
+button.ghost,label.ghost{background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--ink);border-radius:12px;padding:9px 14px;font-size:14px;font-weight:600;cursor:pointer}
+button.ghost.on{border-color:var(--brand);color:var(--brand)}
+input,textarea,select{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:9px;font-size:14px;color:var(--ink);font-family:inherit}
+input:focus{outline:none;border-color:rgba(var(--brandrgb),.6)}
+input[type=number]{width:76px}
+label.f{display:flex;flex-direction:column;gap:3px;font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.03em}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin-bottom:13px}
+.tile{background:linear-gradient(180deg,var(--card1),var(--card2));border:1px solid var(--border);border-radius:16px;padding:12px 14px}
+.tile .v{font-size:25px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.tile .l{font-size:10px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+.hero{display:flex;align-items:center;gap:18px}
+.hero .hr-ring{flex:none}
+.hero .ht{flex:1}
+.hero .ht b{font-size:19px;font-weight:800;letter-spacing:-.01em}
+.hero .ht p{font-size:13px;color:var(--ink2);margin-top:2px}
+.hero .ht .small{margin-top:6px}
+.verdict{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--grid)}
+.verdict:first-of-type{border-top:0}
+.dot{width:9px;height:9px;border-radius:50%;margin-top:6px;flex:none;box-shadow:0 0 10px currentColor}
+.verdict b{font-size:14px}
+.verdict p{font-size:13px;color:var(--ink2)}
+.bar{height:7px;border-radius:4px;background:var(--grid);overflow:hidden;margin-top:6px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--brand2),var(--barend));border-radius:4px}
+.bar i.alt{background:linear-gradient(90deg,#5FA4F0,#2A6FC4)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;color:var(--muted);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;padding:5px 6px;border-bottom:1px solid var(--grid)}
+td{padding:7px 6px;border-bottom:1px solid var(--grid);font-variant-numeric:tabular-nums}
+.grid27{display:grid;grid-template-columns:repeat(auto-fill,minmax(108px,1fr));gap:7px}
+.wk{border:1px solid var(--border);border-radius:13px;padding:8px 9px;cursor:pointer;background:rgba(255,255,255,.025)}
+.wk.cur{border-color:var(--brand);box-shadow:0 0 0 1px var(--brand),0 4px 14px rgba(var(--brandrgb),.25)}
+.wk .n{font-size:10px;color:var(--muted);font-weight:800;letter-spacing:.05em}
+.wk .p{font-size:11px;font-weight:800}
+.wk .k{font-size:12px;color:var(--ink2)}
+svg text{font-family:-apple-system,system-ui,"Segoe UI",sans-serif}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--ink2);margin:2px 0 10px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--page2);font-size:12px;font-weight:600;padding:6px 9px;border-radius:8px;z-index:99;display:none;max-width:240px;box-shadow:0 6px 20px rgba(0,0,0,.5)}
+.day{display:flex;gap:11px;padding:10px 4px;border-top:1px solid var(--grid);cursor:pointer;border-radius:8px}
+.day:hover{background:rgba(255,255,255,.025)}
+.day .d{width:40px;flex:none;text-align:center}
+.day .d b{display:block;font-size:16px;font-weight:800;font-variant-numeric:tabular-nums}
+.day .d span{font-size:9px;color:var(--muted);text-transform:uppercase;font-weight:800;letter-spacing:.08em}
+.day .t{flex:1;min-width:0}
+.day .t b{font-size:14px}
+.day .t p{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.day .st{flex:none;font-size:13px;color:var(--goodtext);align-self:center;font-weight:800}
+details{border-top:1px solid var(--grid);padding:9px 0}
+details summary{cursor:pointer;font-weight:700;font-size:14px}
+details p, details li{font-size:13px;color:var(--ink2);margin:5px 0}
+details ul{padding-left:18px}
+.small{font-size:12px;color:var(--muted)}
+.ok{color:var(--goodtext);font-weight:700}
+.bad{color:var(--crit);font-weight:700}
+.hide{display:none!important}
+.exlist{margin-top:6px}
+.exrow{display:flex;align-items:center;gap:11px;padding:9px 0;border-top:1px solid var(--grid)}
+.exrow:first-child{border-top:0}
+.exrow input[type=checkbox]{width:19px;height:19px;accent-color:var(--brand);flex:none;cursor:pointer}
+.exn{flex:1;min-width:0}
+.exn b{font-size:14px;display:block}
+.exn span{font-size:12px;color:var(--muted)}
+.exl{flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:2px}
+.exl input.w{width:66px;text-align:right}
+.exlast{font-size:10.5px;color:var(--muted)}
+.spark{flex:none}
+details.exd summary{display:flex;align-items:center;gap:10px;list-style:none;flex-wrap:wrap}
+.setbtn{flex:none;display:flex;flex-direction:column;align-items:center;gap:3px;background:rgba(var(--brandrgb),.12);border:1px solid rgba(var(--brandrgb),.45);color:var(--brand2);border-radius:10px;padding:6px 10px;font-size:11px;font-weight:800;cursor:pointer;min-width:74px}
+.setbtn.fin{background:rgba(47,194,79,.13);border-color:rgba(47,194,79,.45);color:var(--goodtext)}
+.setbtn .dots{display:flex;gap:3px}
+.setbtn .dots i{width:7px;height:7px;border-radius:50%;background:var(--grid);display:block}
+.setbtn .dots i.on{background:currentColor}
+.timerbar{position:fixed;left:10px;right:10px;bottom:calc(64px + env(safe-area-inset-bottom));z-index:60;background:linear-gradient(135deg,var(--timer1),var(--card1));border:1px solid rgba(var(--brandrgb),.5);border-radius:14px;padding:10px 14px;display:flex;align-items:center;gap:12px;box-shadow:0 10px 30px rgba(0,0,0,.5);max-width:560px;margin:0 auto}
+.timerbar b{font-size:26px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--brand2);min-width:64px}
+.timerbar span{font-size:12px;color:var(--ink2);flex:1}
+.timerbar .tb{background:rgba(255,255,255,.07);border:1px solid var(--border);color:var(--ink);border-radius:9px;padding:7px 11px;font-size:12px;font-weight:700;cursor:pointer}
+.timerbar.go{border-color:var(--good);animation:pulse 1s ease-in-out 3}
+.timerbar.go b{color:var(--goodtext);font-size:16px;flex:1;min-width:0}
+@keyframes pulse{50%{box-shadow:0 0 24px rgba(47,194,79,.5)}}
+details.wucd{border:1px solid var(--border);border-radius:12px;padding:9px 12px;margin:8px 0;background:rgba(255,255,255,.02)}
+details.wucd summary{font-size:13px;font-weight:800;color:var(--ink2);letter-spacing:.02em}
+.wurow{padding:7px 0;border-top:1px solid var(--grid)}
+.wurow:first-of-type{border-top:0;margin-top:6px}
+.wurow b{font-size:13.5px}
+.wurow .dose{font-size:12px;color:var(--brand2);font-weight:700;margin-left:6px}
+.wurow p{font-size:12.5px;color:var(--muted);margin-top:1px}
+.wl{display:flex;gap:11px;align-items:flex-start;cursor:pointer;width:100%}
+.wl input{width:18px;height:18px;accent-color:var(--brand);flex:none;margin-top:2px;cursor:pointer}
+.wuc{color:var(--brand2);font-weight:800}
+.wuc.ok{color:var(--goodtext)}
+.wurow.added{display:flex;align-items:flex-start;gap:6px}
+.wurow.added .wl{flex:1}
+.rmx{background:none;border:0;color:var(--muted);font-size:13px;cursor:pointer;padding:4px 6px;flex:none}
+.addpick{border-top:1px dashed var(--grid);margin-top:7px;padding:7px 0 0;border-left:0;border-right:0;border-bottom:0;border-radius:0;background:none}
+.addpick summary{font-size:12.5px;color:var(--brand2);font-weight:700;list-style:none;cursor:pointer}
+.libchips{display:flex;flex-wrap:wrap;gap:6px;padding-top:8px}
+button.lib{font-size:12px;padding:6px 10px;text-align:left}
+button.lib span{color:var(--muted);font-size:11px}
+.tmr{background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--brand2);border-radius:8px;padding:5px 9px;font-size:11px;font-weight:800;cursor:pointer;flex:none;margin-top:2px;white-space:nowrap}
+.tmrrow{display:flex;align-items:flex-start;gap:6px}
+.tmrrow .wl{flex:1}
+.setcol{display:flex;flex-direction:column;gap:4px;align-items:stretch;flex:none}
+.setrow{display:flex;gap:4px;justify-content:center}
+.minib{background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--ink2);border-radius:7px;padding:3px 7px;font-size:10.5px;font-weight:800;cursor:pointer;white-space:nowrap}
+.minib.won{border-color:rgba(var(--brandrgb),.5);color:var(--brand2);background:rgba(var(--brandrgb),.10)}
+.minib.tclr{color:var(--brand2)}
+.setbtn .dots em{font-style:normal;font-size:9px;color:var(--goodtext);font-weight:800;margin-left:2px}
+
+.toast{position:fixed;left:50%;transform:translateX(-50%) translateY(14px);bottom:84px;z-index:60;
+  background:var(--toastbg);border:1px solid var(--brand);color:#fff;font-weight:700;font-size:14px;
+  padding:10px 18px;border-radius:999px;box-shadow:0 6px 24px rgba(0,0,0,.5);
+  opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast b{color:var(--brand);margin-right:6px}
+.btn.saved{background:var(--good);border-color:var(--good);color:#fff}
+</style>
+</head>
+<body>
+<header id="hdr"></header>
+<div class="chips" id="chips"></div>
+<main id="main"></main>
+<nav id="nav"></nav>
+<div class="tip" id="tip"></div>
+<div class="timerbar hide" id="timerbar"></div>
+<div class="toast" id="toast"></div>
+<script>
+const SESSIONS = [
+ {
+  "week": 1,
+  "phase": "0 Shins",
+  "date": "2026-09-14",
+  "day": "Mon",
+  "is_down": false,
+  "is_night": false,
+  "is_test": false,
+  "is_race": false,
+  "km": 2.8,
+  "vert": 0,
+  "type": "easy",
+  "title": "Walk-jog 1: 6 x (1 min jog / 2 min walk)",
+  "prescription": "PROVISIONAL starter. About 28 minutes on the treadmill at 0.5-1% incline. Walk 5 minutes, then 6 times: jog 1 min at a shuffle you could talk through, walk 2 min. Walk 5 minutes to finish. Jog around 7.5 km/h on the belt, walk around 5.5 km/h. Shin score out of 10 during, and again tomorrow morning, both go in the notes. Two clean sessions in a row before the next step up.",
+  "id": 1,
+  "route": "belt",
+  "route_note": "Treadmill. If two sessions in a row have left the shins quiet next morning, the same timings can go outside on flat footpath.",
+  "opt_out": "Outside version: identical timings on flat footpath from home. Orthotics in. No camber, no sand yet.",
+  "opt_tm": "This is the treadmill version already.",
+  "hr_note": "No heart-rate target in Phase 0. The test is the talk test: full sentences on every jog. The numbers come once a few weeks of watch data are in.",
+  "wu": {
+   "mins": 5,
+   "items": [
+    [
+     "Walk 5 minutes",
+     "",
+     "The first five minutes of every session are a walk. That IS the warm-up. Brisk by the end of it."
+    ],
+    [
+     "Ankle circles",
+     "10 each way, each foot",
+     "Standing on one leg, hand on the treadmill rail, draw slow circles with the toes."
+    ],
+    [
+     "Heel raises, two feet",
+     "10 slow",
+     "Up onto the toes over two seconds, down over two. Wakes the calves up gently before they work."
+    ]
+   ]
+  },
+  "cd": {
+   "mins": 6,
+   "items": [
+    [
+     "Walk 5 minutes",
+     "",
+     "Do not stop dead. Walk until breathing is normal and the legs feel ordinary."
+    ],
+    [
+     "Band calf stretch, straight knee",
+     "30s each side",
+     "Sit, leg straight, band round the ball of the foot, pull the toes toward you until the big calf muscle pulls."
+    ],
+    [
+     "Band calf stretch, bent knee",
+     "30s each side",
+     "Same, with the knee slightly bent. Moves the stretch lower into the calf, which is the bit that pulls on the shin."
+    ],
+    [
+     "Ice if the shins spoke up",
+     "15 min",
+     "Wrapped, straight after. Skip it on a quiet day."
+    ]
+   ]
+  }
+ },
+ {
+  "week": 1,
+  "phase": "0 Shins",
+  "date": "2026-09-15",
+  "day": "Tue",
+  "is_down": false,
+  "is_night": false,
+  "is_test": false,
+  "is_race": false,
+  "km": 0,
+  "vert": 0,
+  "type": "rest",
+  "title": "Rest + band stretch",
+  "prescription": "Band calf stretch, straight knee then bent knee, 30 seconds each, both sides, morning and evening. A 20-30 minute walk is fine and good. No jogging. ",
+  "id": 2
+ },
+ {
+  "week": 1,
+  "phase": "0 Shins",
+  "date": "2026-09-16",
+  "day": "Wed",
+  "is_down": false,
+  "is_night": false,
+  "is_test": false,
+  "is_race": false,
+  "km": 3.1,
+  "vert": 0,
+  "type": "easy",
+  "title": "Walk-jog 2: 7 x (1 min jog / 2 min walk)",
+  "prescription": "PROVISIONAL starter. About 31 minutes on the treadmill at 0.5-1% incline. Walk 5 minutes, then 7 times: jog 1 min at a shuffle you could talk through, walk 2 min. Walk 5 minutes to finish. Jog around 7.5 km/h on the belt, walk around 5.5 km/h. Shin score out of 10 during, and again tomorrow morning, both go in the notes. Two clean sessions in a row before the next step up.",
+  "id": 3,
+  "route": "belt",
+  "route_note": "Treadmill. If two sessions in a row have left the shins quiet next morning, the same timings can go outside on flat footpath.",
+  "opt_out": "Outside version: identical timings on flat footpath from home. Orthotics in. No camber, no sand yet.",
+  "opt_tm": "This is the treadmill version already.",
+  "hr_note": "No heart-rate target in Phase 0. The test is the talk test: full sentences on every jog. The numbers come once a few weeks of watch data are in.",
+  "wu": {
+   "mins": 5,
+   "items": [
+    [
+     "Walk 5 minutes",
+     "",
+     "The first five minutes of every session are a walk. That IS the warm-up. Brisk by the end of it."
+    ],
+    [
+     "Ankle circles",
+     "10 each way, each foot",
+     "Standing on one leg, hand on the treadmill rail, draw slow circles with the toes."
+    ],
+    [
+     "Heel raises, two feet",
+     "10 slow",
+     "Up onto the toes over two seconds, down over two. Wakes the calves up gently before they work."
+    ]
+   ]
+  },
+  "cd": {
+   "mins": 6,
+   "items": [
+    [
+     "Walk 5 minutes",
+     "",
+     "Do not stop dead. Walk until breathing is normal and the legs feel ordinary."
+    ],
+    [
+     "Band calf stretch, straight knee",
+     "30s each side",
+     "Sit, leg straight, band round the ball of the foot, pull the toes toward you until the big calf muscle pulls."
+    ],
+    [
+     "Band calf stretch, bent knee",
+     "30s each side",
+     "Same, with the knee slightly bent. Moves the stretch lower into the calf, which is the bit that pulls on the shin."
+    ],
+    [
+     "Ice if the shins spoke up",
+     "15 min",
+     "Wrapped, straight after. Skip it on a quiet day."
+    ]
+   ]
+  }
+ },
+ {
+  "week": 1,
+  "phase": "0 Shins",
+  "date": "2026-09-17",
+  "day": "Thu",
+  "is_down": false,
+  "is_night": false,
+  "is_test": false,
+  "is_race": false,
+  "km": 0,
+  "vert": 0,
+  "type": "rest",
+  "title": "Rest + band stretch",
+  "prescription": "Band calf stretch, straight knee then bent knee, 30 seconds each, both sides, morning and evening. A 20-30 minute walk is fine and good. No jogging. ",
+  "id": 4
+ },
+ {
+  "week": 1,
+  "phase": "0 Shins",
+  "date": "2026-09-18",
+  "day": "Fri",
+  "is_down": false,
+  "is_night": false,
+  "is_test": false,
+  "is_race": false,
+  "km": 3.1,
+  "vert": 0,
+  "type": "easy",
+  "title": "Walk-jog 3: 6 x (1.5 min jog / 2 min walk)",
+  "prescription": "PROVISIONAL starter. About 31.0 minutes on the treadmill at 0.5-1% incline. Walk 5 minutes, then 6 times: jog 1.5 min at a shuffle you could talk through, walk 2 min. Walk 5 minutes to finish. Jog around 7.5 km/h on the belt, walk around 5.5 km/h. Shin score out of 10 during, and again tomorrow morning, both go in the notes. Two clean sessions in a row before the next step up.",
+  "id": 5,
+  "route": "belt",
+  "route_note": "Treadmill. If two sessions in a row have left the shins quiet next morning, the same timings can go outside on flat footpath.",
+  "opt_out": "Outside version: identical timings on flat footpath from home. Orthotics in. No camber, no sand yet.",
+  "opt_tm": "This is the treadmill version already.",
+  "hr_note": "No heart-rate target in Phase 0. The test is the talk test: full sentences on every jog. The numbers come once a few weeks of watch data are in.",
+  "wu": {
+   "mins": 5,
+   "items": [
+    [
+     "Walk 5 minutes",
+     "",
+     "The first five minutes of every session are a walk. That IS the warm-up. Brisk by the end of it."
+    ],
+    [
+     "Ankle circles",
+     "10 each way, each foot",
+     "Standing on one leg, hand on the treadmill rail, draw slow circles with the toes."
+    ],
+    [
+     "Heel raises, two feet",
+     "10 slow",
+     "Up onto the toes over two seconds, down over two. Wakes the calves up gently before they work."
+    ]
+   ]
+  },
+  "cd": {
+   "mins": 6,
+   "items": [
+    [
+     "Walk 5 minutes",
+     "",
+     "Do not stop dead. Walk until breathing is normal and the legs feel ordinary."
+    ],
+    [
+     "Band calf stretch, straight knee",
+     "30s each side",
+     "Sit, leg straight, band round the ball of the foot, pull the toes toward you until the big calf muscle pulls."
+    ],
+    [
+     "Band calf stretch, bent knee",
+     "30s each side",
+     "Same, with the knee slightly bent. Moves the stretch lower into the calf, which is the bit that pulls on the shin."
+    ],
+    [
+     "Ice if the shins spoke up",
+     "15 min",
+     "Wrapped, straight after. Skip it on a quiet day."
+    ]
+   ]
+  }
+ },
+ {
+  "week": 1,
+  "phase": "0 Shins",
+  "date": "2026-09-19",
+  "day": "Sat",
+  "is_down": false,
+  "is_night": false,
+  "is_test": false,
+  "is_race": false,
+  "km": 0,
+  "vert": 0,
+  "type": "strength",
+  "title": "Shin strength 1",
+  "prescription": "Bodyweight only, about 15 minutes. These are the muscles that take load off the shin bone. Slow and controlled beats more reps. Skip anything the podiatrist has said not to do, and say so in the notes.",
+  "id": 6,
+  "exercises": [
+   {
+    "k": "tibraise",
+    "name": "Toe raises (tibialis)",
+    "scheme": "2 x 15",
+    "note": "back against a wall, heels 30cm out, lift the toes toward the shins and lower slowly. This is the muscle down the front of the shin",
+    "load": false,
+    "sets": 2,
+    "rest": 45
+   },
+   {
+    "k": "calfraise2",
+    "name": "Heel raises, two feet",
+    "scheme": "2 x 12 slow",
+    "note": "on flat ground, two seconds up, two seconds down. Move to a step edge only when the podiatrist is happy",
+    "load": false,
+    "sets": 2,
+    "rest": 45
+   },
+   {
+    "k": "balance",
+    "name": "Single-leg balance",
+    "scheme": "2 x 30s each leg",
+    "note": "barefoot if you can, near something to grab. Eyes on one spot",
+    "load": false,
+    "sets": 2,
+    "rest": 30
+   },
+   {
+    "k": "bridge",
+    "name": "Glute bridge",
+    "scheme": "2 x 12",
+    "note": "squeeze the glutes at the top, do not arch the back",
+    "load": false,
+    "sets": 2,
+    "rest": 45
+   },
+   {
+    "k": "sideleg",
+    "name": "Side-lying leg raise",
+    "scheme": "2 x 12 each side",
+    "note": "on your side, top leg straight, lift to hip height and lower slowly. Hips and the side of the glute",
+    "load": false,
+    "sets": 2,
+    "rest": 30
+   }
+  ],
+  "wu": {
+   "mins": 4,
+   "items": [
+    [
+     "March on the spot",
+     "1 min",
+     "Knees up, arms swinging, just getting warm."
+    ],
+    [
+     "Glute bridges",
+     "10 slow",
+     "On your back, knees bent, push the hips up and squeeze at the top for two seconds."
+    ],
+    [
+     "Ankle wall rocks",
+     "10 each side",
+     "Foot 10cm from a wall, drive the knee forward to touch it, heel stays down."
+    ]
+   ]
+  },
+  "cd": {
+   "mins": 3,
+   "items": [
+    [
+     "Band calf stretch, straight knee",
+     "30s each side",
+     "As after a run."
+    ],
+    [
+     "Band calf stretch, bent knee",
+     "30s each side",
+     "As after a run."
+    ]
+   ]
+  }
+ },
+ {
+  "week": 1,
+  "phase": "0 Shins",
+  "date": "2026-09-20",
+  "day": "Sun",
+  "is_down": false,
+  "is_night": false,
+  "is_test": false,
+  "is_race": false,
+  "km": 0,
+  "vert": 0,
+  "type": "rest",
+  "title": "Rest, walk, stretch",
+  "prescription": "Band calf stretch, straight knee then bent knee, 30 seconds each, both sides, morning and evening. A 20-30 minute walk is fine and good. No jogging. Sunday walk with the family counts.",
+  "id": 7
+ },
+ {
+  "week": 2,
+  "phase": "0 Shins",
+  "date": "2026-09-21",
+  "day": "Mon",
+  "is_down": false,
+  "is_night": false,
+  "is_test": false,
+  "is_race": false,
+  "km": 3.5,
+  "vert": 0,
+  "type": "easy",
+  "title": "Walk-jog 4: 7 x (1.5 min jog / 2 min walk)",
+  "prescription": "PROVISIONAL starter. About 34.5 minutes on the treadmill at 0.5-1% incline. Walk 5 minutes, then 7 times: jog 1.5 min at a shuffle you could talk through, walk 2 min. Walk 5 minutes to finish. Jog around 7.5 km/h on the belt, walk around 5.5 km/h. Shin score out of 10 during, and again tomorrow morning, both go in the notes. Two clean sessions in a row before the next step up.",
+  "id": 8,
+  "route": "belt",
+  "route_note": "Treadmill. If two sessions in a row have left the shins quiet next morning, the same timings can go outside on flat footpath.",
+  "opt_out": "Outside version: identical timings on flat footpath from home. Orthotics in. No camber, no sand yet.",
+  "opt_tm": "This is the treadmill version already.",
+  "hr_note": "No heart-rate target in Phase 0. The test is the talk test: full sentences on every jog. The numbers come once a few weeks of watch data are in.",
+  "wu": {
+   "mins": 5,
+   "items": [
+    [
+     "Walk 5 minutes",
+     "",
+     "The first five minutes of every session are a walk. That IS the warm-up. Brisk by the end of it."
+    ],
+    [
+     "Ankle circles",
+     "10 each way, each foot",
+     "Standing on one leg, hand on the treadmill rail, draw slow circles with the toes."
+    ],
+    [
+     "Heel raises, two feet",
+     "10 slow",
+     "Up onto the toes over two seconds, down over two. Wakes the calves up gently before they work."
+    ]
+   ]
+  },
+  "cd": {
+   "mins": 6,
+   "items": [
+    [
+     "Walk 5 minutes",
+     "",
+     "Do not stop dead. Walk until breathing is normal and the legs feel ordinary."
+    ],
+    [
+     "Band calf stretch, straight knee",
+     "30s each side",
+     "Sit, leg straight, band round the ball of the foot, pull the toes toward you until the big calf muscle pulls."
+    ],
+    [
+     "Band calf stretch, bent knee",
+     "30s each side",
+     "Same, with the knee slightly bent. Moves the stretch lower into the calf, which is the bit that pulls on the shin."
+    ],
+    [
+     "Ice if the shins spoke up",
+     "15 min",
+     "Wrapped, straight after. Skip it on a quiet day."
+    ]
+   ]
+  }
+ },
+ {
+  "week": 2,
+  "phase": "0 Shins",
+  "date": "2026-09-22",
+  "day": "Tue",
+  "is_down": false,
+  "is_night": false,
+  "is_test": false,
+  "is_race": false,
+  "km": 0,
+  "vert": 0,
+  "type": "rest",
+  "title": "Rest + band stretch",
+  "prescription": "Band calf stretch, straight knee then bent knee, 30 seconds each, both sides, morning and evening. A 20-30 minute walk is fine and good. No jogging. ",
+  "id": 9
+ },
+ {
+  "week": 2,
+  "phase": "0 Shins",
+  "date": "2026-09-23",
+  "day": "Wed",
+  "is_down": false,
+  "is_night": false,
+  "is_test": false,
+  "is_race": false,
+  "km": 3.5,
+  "vert": 0,
+  "type": "easy",
+  "title": "Walk-jog 5: 6 x (2 min jog / 2 min walk)",
+  "prescription": "PROVISIONAL starter. About 34 minutes on the treadmill at 0.5-1% incline. Walk 5 minutes, then 6 times: jog 2 min at a shuffle you could talk through, walk 2 min. Walk 5 minutes to finish. Jog around 7.5 km/h on the belt, walk around 5.5 km/h. Shin score out of 10 during, and again tomorrow morning, both go in the notes. Two clean sessions in a row before the next step up.",
+  "id": 10,
+  "route": "belt",
+  "route_note": "Treadmill. If two sessions in a row have left the shins quiet next morning, the same timings can go outside on flat footpath.",
+  "opt_out": "Outside version: identical timings on flat footpath from home. Orthotics in. No camber, no sand yet.",
+  "opt_tm": "This is the treadmill version already.",
+  "hr_note": "No heart-rate target in Phase 0. The test is the talk test: full sentences on every jog. The numbers come once a few weeks of watch data are in.",
+  "wu": {
+   "mins": 5,
+   "items": [
+    [
+     "Walk 5 minutes",
+     "",
+     "The first five minutes of every session are a walk. That IS the warm-up. Brisk by the end of it."
+    ],
+    [
+     "Ankle circles",
+     "10 each way, each foot",
+     "Standing on one leg, hand on the treadmill rail, draw slow circles with the toes."
+    ],
+    [
+     "Heel raises, two feet",
+     "10 slow",
+     "Up onto the toes over two seconds, down over two. Wakes the calves up gently before they work."
+    ]
+   ]
+  },
+  "cd": {
+   "mins": 6,
+   "items": [
+    [
+     "Walk 5 minutes",
+     "",
+     "Do not stop dead. Walk until breathing is normal and the legs feel ordinary."
+    ],
+    [
+     "Band calf stretch, straight knee",
+     "30s each side",
+     "Sit, leg straight, band round the ball of the foot, pull the toes toward you until the big calf muscle pulls."
+    ],
+    [
+     "Band calf stretch, bent knee",
+     "30s each side",
+     "Same, with the knee slightly bent. Moves the stretch lower into the calf, which is the bit that pulls on the shin."
+    ],
+    [
+     "Ice if the shins spoke up",
+     "15 min",
+     "Wrapped, straight after. Skip it on a quiet day."
+    ]
+   ]
+  }
+ },
+ {
+  "week": 2,
+  "phase": "0 Shins",
+  "date": "2026-09-24",
+  "day": "Thu",
+  "is_down": false,
+  "is_night": false,
+  "is_test": false,
+  "is_race": false,
+  "km": 0,
+  "vert": 0,
+  "type": "rest",
+  "title": "Rest + band stretch",
+  "prescription": "Band calf stretch, straight knee then bent knee, 30 seconds each, both sides, morning and evening. A 20-30 minute walk is fine and good. No jogging. ",
+  "id": 11
+ },
+ {
+  "week": 2,
+  "phase": "0 Shins",
+  "date": "2026-09-25",
+  "day": "Fri",
+  "is_down": false,
+  "is_night": false,
+  "is_test": false,
+  "is_race": false,
+  "km": 4.0,
+  "vert": 0,
+  "type": "easy",
+  "title": "Walk-jog 6: 7 x (2 min jog / 2 min walk)",
+  "prescription": "PROVISIONAL starter. About 38 minutes on the treadmill at 0.5-1% incline. Walk 5 minutes, then 7 times: jog 2 min at a shuffle you could talk through, walk 2 min. Walk 5 minutes to finish. Jog around 7.5 km/h on the belt, walk around 5.5 km/h. Shin score out of 10 during, and again tomorrow morning, both go in the notes. Two clean sessions in a row before the next step up.",
+  "id": 12,
+  "route": "belt",
+  "route_note": "Treadmill. If two sessions in a row have left the shins quiet next morning, the same timings can go outside on flat footpath.",
+  "opt_out": "Outside version: identical timings on flat footpath from home. Orthotics in. No camber, no sand yet.",
+  "opt_tm": "This is the treadmill version already.",
+  "hr_note": "No heart-rate target in Phase 0. The test is the talk test: full sentences on every jog. The numbers come once a few weeks of watch data are in.",
+  "wu": {
+   "mins": 5,
+   "items": [
+    [
+     "Walk 5 minutes",
+     "",
+     "The first five minutes of every session are a walk. That IS the warm-up. Brisk by the end of it."
+    ],
+    [
+     "Ankle circles",
+     "10 each way, each foot",
+     "Standing on one leg, hand on the treadmill rail, draw slow circles with the toes."
+    ],
+    [
+     "Heel raises, two feet",
+     "10 slow",
+     "Up onto the toes over two seconds, down over two. Wakes the calves up gently before they work."
+    ]
+   ]
+  },
+  "cd": {
+   "mins": 6,
+   "items": [
+    [
+     "Walk 5 minutes",
+     "",
+     "Do not stop dead. Walk until breathing is normal and the legs feel ordinary."
+    ],
+    [
+     "Band calf stretch, straight knee",
+     "30s each side",
+     "Sit, leg straight, band round the ball of the foot, pull the toes toward you until the big calf muscle pulls."
+    ],
+    [
+     "Band calf stretch, bent knee",
+     "30s each side",
+     "Same, with the knee slightly bent. Moves the stretch lower into the calf, which is the bit that pulls on the shin."
+    ],
+    [
+     "Ice if the shins spoke up",
+     "15 min",
+     "Wrapped, straight after. Skip it on a quiet day."
+    ]
+   ]
+  }
+ },
+ {
+  "week": 2,
+  "phase": "0 Shins",
+  "date": "2026-09-26",
+  "day": "Sat",
+  "is_down": false,
+  "is_night": false,
+  "is_test": false,
+  "is_race": false,
+  "km": 0,
+  "vert": 0,
+  "type": "strength",
+  "title": "Shin strength 2",
+  "prescription": "Bodyweight only, about 15 minutes. These are the muscles that take load off the shin bone. Slow and controlled beats more reps. Skip anything the podiatrist has said not to do, and say so in the notes.",
+  "id": 13,
+  "exercises": [
+   {
+    "k": "tibraise",
+    "name": "Toe raises (tibialis)",
+    "scheme": "2 x 15",
+    "note": "back against a wall, heels 30cm out, lift the toes toward the shins and lower slowly. This is the muscle down the front of the shin",
+    "load": false,
+    "sets": 2,
+    "rest": 45
+   },
+   {
+    "k": "calfraise2",
+    "name": "Heel raises, two feet",
+    "scheme": "2 x 12 slow",
+    "note": "on flat ground, two seconds up, two seconds down. Move to a step edge only when the podiatrist is happy",
+    "load": false,
+    "sets": 2,
+    "rest": 45
+   },
+   {
+    "k": "balance",
+    "name": "Single-leg balance",
+    "scheme": "2 x 30s each leg",
+    "note": "barefoot if you can, near something to grab. Eyes on one spot",
+    "load": false,
+    "sets": 2,
+    "rest": 30
+   },
+   {
+    "k": "bridge",
+    "name": "Glute bridge",
+    "scheme": "2 x 12",
+    "note": "squeeze the glutes at the top, do not arch the back",
+    "load": false,
+    "sets": 2,
+    "rest": 45
+   },
+   {
+    "k": "sideleg",
+    "name": "Side-lying leg raise",
+    "scheme": "2 x 12 each side",
+    "note": "on your side, top leg straight, lift to hip height and lower slowly. Hips and the side of the glute",
+    "load": false,
+    "sets": 2,
+    "rest": 30
+   }
+  ],
+  "wu": {
+   "mins": 4,
+   "items": [
+    [
+     "March on the spot",
+     "1 min",
+     "Knees up, arms swinging, just getting warm."
+    ],
+    [
+     "Glute bridges",
+     "10 slow",
+     "On your back, knees bent, push the hips up and squeeze at the top for two seconds."
+    ],
+    [
+     "Ankle wall rocks",
+     "10 each side",
+     "Foot 10cm from a wall, drive the knee forward to touch it, heel stays down."
+    ]
+   ]
+  },
+  "cd": {
+   "mins": 3,
+   "items": [
+    [
+     "Band calf stretch, straight knee",
+     "30s each side",
+     "As after a run."
+    ],
+    [
+     "Band calf stretch, bent knee",
+     "30s each side",
+     "As after a run."
+    ]
+   ]
+  }
+ },
+ {
+  "week": 2,
+  "phase": "0 Shins",
+  "date": "2026-09-27",
+  "day": "Sun",
+  "is_down": false,
+  "is_night": false,
+  "is_test": false,
+  "is_race": false,
+  "km": 0,
+  "vert": 0,
+  "type": "rest",
+  "title": "Rest, walk, stretch",
+  "prescription": "Band calf stretch, straight knee then bent knee, 30 seconds each, both sides, morning and evening. A 20-30 minute walk is fine and good. No jogging. End of the starter fortnight. Send the coach the two-week picture: shin scores, what stepped up, what got repeated.",
+  "id": 14
+ }
+];
+const WEEKS = {
+ "1": {
+  "phase": "0 Shins",
+  "km": 9,
+  "vert": 0,
+  "down": false,
+  "note": "PROVISIONAL starter. Walk-jog x3, every second day"
+ },
+ "2": {
+  "phase": "0 Shins",
+  "km": 11,
+  "vert": 0,
+  "down": false,
+  "note": "Step up only after two clean sessions"
+ },
+ "3": {
+  "phase": "0 Shins",
+  "km": 13,
+  "vert": 0,
+  "down": false,
+  "note": "placeholder until written"
+ },
+ "4": {
+  "phase": "0 Shins",
+  "km": 10,
+  "vert": 0,
+  "down": true,
+  "note": "Down week: shins get a breather"
+ },
+ "5": {
+  "phase": "1 Run 5k",
+  "km": 13,
+  "vert": 0,
+  "down": false,
+  "note": "placeholder until written"
+ },
+ "6": {
+  "phase": "1 Run 5k",
+  "km": 15,
+  "vert": 0,
+  "down": false,
+  "note": "placeholder until written"
+ },
+ "7": {
+  "phase": "1 Run 5k",
+  "km": 16,
+  "vert": 0,
+  "down": false,
+  "note": "placeholder until written"
+ },
+ "8": {
+  "phase": "1 Run 5k",
+  "km": 12,
+  "vert": 0,
+  "down": true,
+  "note": "Down week"
+ },
+ "9": {
+  "phase": "2 Build",
+  "km": 17,
+  "vert": 0,
+  "down": false,
+  "note": "placeholder until written"
+ },
+ "10": {
+  "phase": "2 Build",
+  "km": 19,
+  "vert": 0,
+  "down": false,
+  "note": "placeholder until written"
+ },
+ "11": {
+  "phase": "2 Build",
+  "km": 21,
+  "vert": 0,
+  "down": false,
+  "note": "placeholder until written"
+ },
+ "12": {
+  "phase": "2 Build",
+  "km": 16,
+  "vert": 0,
+  "down": true,
+  "note": "Down week"
+ },
+ "13": {
+  "phase": "2 Build",
+  "km": 23,
+  "vert": 0,
+  "down": false,
+  "note": "placeholder until written"
+ },
+ "14": {
+  "phase": "2 Build",
+  "km": 25,
+  "vert": 0,
+  "down": false,
+  "note": "placeholder until written"
+ },
+ "15": {
+  "phase": "2 Build",
+  "km": 27,
+  "vert": 0,
+  "down": false,
+  "note": "placeholder until written"
+ },
+ "16": {
+  "phase": "2 Build",
+  "km": 21,
+  "vert": 0,
+  "down": true,
+  "note": "Down week, Christmas"
+ },
+ "17": {
+  "phase": "3 Trail",
+  "km": 28,
+  "vert": 150,
+  "down": false,
+  "note": "placeholder until written"
+ },
+ "18": {
+  "phase": "3 Trail",
+  "km": 30,
+  "vert": 150,
+  "down": false,
+  "note": "placeholder until written"
+ },
+ "19": {
+  "phase": "3 Trail",
+  "km": 32,
+  "vert": 150,
+  "down": false,
+  "note": "placeholder until written"
+ },
+ "20": {
+  "phase": "3 Trail",
+  "km": 25,
+  "vert": 150,
+  "down": true,
+  "note": "Down week"
+ },
+ "21": {
+  "phase": "3 Trail",
+  "km": 30,
+  "vert": 150,
+  "down": false,
+  "note": "placeholder until written"
+ },
+ "22": {
+  "phase": "4 Taper",
+  "km": 24,
+  "vert": 60,
+  "down": false,
+  "note": "Taper starts"
+ },
+ "23": {
+  "phase": "4 Taper",
+  "km": 17,
+  "vert": 60,
+  "down": false,
+  "note": "placeholder until written"
+ },
+ "24": {
+  "phase": "4 Taper",
+  "km": 28,
+  "vert": 60,
+  "down": false,
+  "note": "RACE WEEK: takayna trail Sat 27 Feb"
+ }
+};
+const CONTENT = {};
+const ATHLETE = {
+ "name": "Jess Evans",
+ "first": "Jess",
+ "slug": "jess",
+ "store_prefix": "tk",
+ "title": "takayna 2027 — Jess",
+ "theme_color": "#1D2720",
+ "device": "Apple Watch",
+ "start": "2026-09-14",
+ "race": "2027-02-27",
+ "weeks": 24,
+ "race_short": "takayna",
+ "race_name": "takayna trail",
+ "start_label": "Plan starts Mon 14 Sep 2026",
+ "plan_title": "24-week build · Mon 14 Sep → takayna trail Sat 27 Feb",
+ "tabs": [
+  "Today",
+  "Week",
+  "Plan",
+  "Strength",
+  "Progress",
+  "Rules",
+  "Sync"
+ ],
+ "colors": {
+  "--page": "#1D2720",
+  "--surface": "#2A352D",
+  "--surface2": "#222C25",
+  "--ink": "#F2EEE3",
+  "--ink2": "#C9CDC2",
+  "--muted": "#8C968C",
+  "--grid": "#33403A",
+  "--axis": "#46544C",
+  "--border": "rgba(255,255,255,.07)",
+  "--brand": "#B7683A",
+  "--brand2": "#D6834E",
+  "--branddeep": "#8A4A26",
+  "--s1": "#D6834E",
+  "--s2": "#5FA8A0",
+  "--s3": "#7DB77A",
+  "--z1": "#F0D3B8",
+  "--z2": "#D6834E",
+  "--z3": "#8A4A26",
+  "--good": "#6DBE7A",
+  "--warn": "#E2B94A",
+  "--serious": "#E08A5C",
+  "--crit": "#D9534F",
+  "--goodtext": "#7BCB87",
+  "--night": "#8E7CF0",
+  "--card1": "#2B362E",
+  "--card2": "#25302A",
+  "--timer1": "#33413A",
+  "--toastbg": "#2B362E",
+  "--brandrgb": "183,104,58",
+  "--glow": "#3A4A3F",
+  "--page2": "#242E27",
+  "--barend": "#A85A2E",
+  "--navrgb": "29,39,32"
+ },
+ "header_html": "<svg class=\"mark\" viewBox=\"0 0 512 512\"><rect width=\"512\" height=\"512\" rx=\"112\" fill=\"#2A352D\"/><circle cx=\"372\" cy=\"150\" r=\"46\" fill=\"#D6834E\"/><path d=\"M96 420 L176 236 L256 420 Z\" fill=\"#F2EEE3\" opacity=\".92\"/><path d=\"M206 420 L296 190 L386 420 Z\" fill=\"#F2EEE3\"/><path d=\"M318 420 L372 300 L426 420 Z\" fill=\"#F2EEE3\" opacity=\".8\"/><rect x=\"72\" y=\"416\" width=\"368\" height=\"10\" rx=\"5\" fill=\"#B7683A\"/></svg><div><h1>TAKAYNA<span> TRAIL</span></h1><p class=\"tag\">22 KM · TAS · 27 FEB 2027</p></div><div class=\"count\"><b id=\"cd\">—</b><span>days to go</span></div>",
+ "routes": {
+  "belt": {
+   "ico": "🏃",
+   "name": "TREADMILL",
+   "desc": "Home base for Phase 0. Flat, soft, and the belt speed is the honest number. Set it to 0.5-1% incline so it is not easier than the road, never more than that while the shins settle."
+  },
+  "flat": {
+   "ico": "🛣️",
+   "name": "FLAT FOOTPATH FROM HOME",
+   "desc": "Once two treadmill sessions in a row leave the shins quiet the next morning, the same walk-jog timings can move outside. Flat only. Footpath or hard sand is fine, cambered road edges are not."
+  },
+  "trail": {
+   "ico": "🌲",
+   "name": "TRAIL - later, with Mitch",
+   "desc": "Not before Phase 3. When it arrives it comes in as walking the hills first, then jogging the flats between them."
+  },
+  "race": {
+   "ico": "🏁",
+   "name": "RACE DAY",
+   "desc": "takayna trail, Waratah, Tasmania. 22km. The point is to get round and raise the money."
+  }
+ },
+ "route_order": [
+  "belt",
+  "flat",
+  "trail"
+ ],
+ "chain": null,
+ "tt_markers": null,
+ "tt_chart": null,
+ "predictor": null,
+ "easy": {
+  "pace_spk": 480,
+  "hr": 150,
+  "drift_text": "Some sessions came in quicker than easy. In Phase 0 easy means full sentences the whole way. The numbers get set properly once a few weeks of Apple Watch data are in."
+ },
+ "zone_est": {
+  "hr1": 145,
+  "hr2": 165,
+  "pace1": 480,
+  "pace2": 400
+ },
+ "milestones_html": "<div class=\"card\"><h2>The shape of it (provisional)</h2><table><tr><th>When</th><th>What</th></tr>\n  <tr><td>W1-4 · Sep-Oct</td><td>Phase 0: walk-jog every second day, shins settle, orthotics bed in</td></tr>\n  <tr><td>W5-8 · Oct-Nov</td><td>Phase 1: jog 5km without stopping, still only every second day</td></tr>\n  <tr><td>W9-16 · Nov-Dec</td><td>Phase 2: the long walk-run grows, one a week, up to about 14km by Christmas</td></tr>\n  <tr><td>W17-21 · Jan-Feb</td><td>Phase 3: trail and hills with Mitch, longest walk-run about 16-17km</td></tr>\n  <tr><td>W22-24 · Feb</td><td>Phase 4: taper, pack, fly</td></tr>\n  <tr><td><b>Sat 27 Feb</b></td><td><b>takayna trail 22km · Waratah, Tasmania · get round, raise the money</b></td></tr></table>\n  <p class=\"small\" style=\"margin-top:6px\">Weeks 3 to 24 are placeholders. They get written week by week off what the shins actually do.</p></div>",
+ "rules_html": "<div class=\"card\"><h2>How this app works</h2>\n  <div class=\"rtcard\"><span class=\"rtico\">&#128207;</span><div><b>Every km on a card is the whole session</b><p>Walking and jogging both count. The number is the total distance you will cover, warm-up walk to cool-down walk.</p></div></div>\n  <div class=\"rtcard\"><span class=\"rtico\">&#9997;&#65039;</span><div><b>Log every session, especially the bad ones</b><p>Tick it done, put the shin score (0-10) in the notes, and what it felt like the next morning. That is what the plan gets adjusted on.</p></div></div>\n  <div class=\"rtcard\"><span class=\"rtico\">&#128172;</span><div><b>Tell the coach after each session</b><p>A text to Mitch with how it went is enough: what you did, shin score during, shin score next morning. The plan changes off that, not off what was written weeks ago.</p></div></div>\n  <div class=\"rtcard\"><span class=\"rtico\">&#9203;</span><div><b>Everything past Week 2 is a placeholder</b><p>The first fortnight is real. The rest of the calendar is the shape of the build, and gets written properly once your intake answers and the first two weeks of data are in.</p></div></div></div>\n\n<div class=\"card\"><h2>Phase 0: settle the shins first</h2>\n  <p class=\"small\">The podiatrist said low intensity and build the volume from there. This phase is that, written down.</p>\n  <div class=\"rtcard\"><span class=\"rtico\">&#128694;</span><div><b>Walk-jog only, every second day</b><p>Short jogs with longer walks between them. Never two run days back to back in Phase 0. The day between is when the bone adapts.</p></div></div>\n  <div class=\"rtcard\"><span class=\"rtico\">&#127939;</span><div><b>The jog is a shuffle</b><p>Slow enough to speak full sentences. Short, quick steps, feet landing under you. Long strides load the shin. If you cannot talk, that is not Phase 0 pace.</p></div></div>\n  <div class=\"rtcard\"><span class=\"rtico\">&#128200;</span><div><b>Step up only after two clean sessions</b><p>The next session gets longer jogs only when the previous TWO left the shins quiet the next morning. One clean session is not enough. If in doubt, repeat the step.</p></div></div>\n  <div class=\"rtcard\"><span class=\"rtico\">&#127947;&#65039;</span><div><b>No leg-based classes in Phase 0</b><p>HIIT, jump-based or plyometric classes are what tipped the shins over last time. Upper body, swimming, bike, and the shin-strength session in this app are all fine.</p></div></div>\n  <div class=\"rtcard\"><span class=\"rtico\">&#129525;</span><div><b>The band stretch, twice a day</b><p>Sit with the leg straight, loop the band round the ball of the foot, pull the toes toward you until the calf pulls. 30 seconds, then bend the knee slightly and hold another 30. Each side. Morning, and after every session.</p></div></div>\n  <div class=\"rtcard\"><span class=\"rtico\">&#129482;</span><div><b>Ice after any session where the shins spoke up</b><p>15 minutes, wrapped, straight after. Not needed on a quiet day.</p></div></div>\n  <div class=\"rtcard\"><span class=\"rtico\">&#129406;</span><div><b>Orthotics and shoes</b><p>Wear the orthotics in every session from the day you get them, including the walks. Note in the log which shoes you wore. Two pairs rotated is better than one once the volume goes up.</p></div></div></div>\n\n<div class=\"card\"><h2>Shin traffic light</h2>\n  <div class=\"verdict\"><span class=\"dot\" style=\"background:var(--good)\"></span><div><b>Green: 0-2 out of 10 during, gone by the next morning</b><p>Carry on as written. Log it.</p></div></div>\n  <div class=\"verdict\"><span class=\"dot\" style=\"background:var(--warn)\"></span><div><b>Amber: 3-4 during, or a dull ache still there next morning</b><p>Finish the session walking. Repeat this step next time instead of stepping up. Band stretch and ice. Two ambers in a row means an extra rest day and tell the coach.</p></div></div>\n  <div class=\"verdict\"><span class=\"dot\" style=\"background:var(--crit)\"></span><div><b>Red: 5+, pain walking, hopping on one leg hurts, ONE spot on the bone you can press that is tender, or it aches at night</b><p>Stop. No jogging until the podiatrist has looked at it. Those last three are the signs it might be more than shin splints, and that gets checked, not trained through.</p></div></div>\n  <p class=\"small\" style=\"margin-top:8px\">These are the standard return-to-running rules for shin pain. The podiatrist's instructions override anything here.</p></div>\n\n<div class=\"card\"><h2>Where to run</h2>{{routes}}</div>\n\n<div class=\"card\"><h2>Setup checklist</h2><details open><summary>One-time, in this order</summary>\n  <ul><li>☐ Fill in the intake on the Today tab and press Send to coach</li>\n  <li>☐ Record every session with the Apple Watch <b>Workout</b> app (Indoor Run on the treadmill, Outdoor Run outside)</li>\n  <li>☐ Install Strava, create a free account. In Strava: Settings → Manage Apps and Devices → Health → turn on <b>Automatic Uploads</b>. Runs then land in Strava on their own</li>\n  <li>☐ Create a free <b>intervals.icu</b> account and connect Strava to it (Settings → Strava)</li>\n  <li>☐ In intervals.icu Settings, scroll to Developer Settings, copy the API key and Athlete ID into this app's Sync tab. Do this on the phone; it stays on the phone</li>\n  <li>☐ Fundraising page link saved somewhere you can find it</li></ul></details></div>",
+ "events": [
+  {
+   "name": "takayna trail",
+   "date": "2027-02-27",
+   "km": 22,
+   "where": "Waratah, TAS",
+   "target": true,
+   "note": "Fundraiser for the Bob Brown Foundation. Running it with Mitch. No pace goal."
+  }
+ ],
+ "intake": {
+  "title": "Before we start",
+  "intro": "About five minutes. Your answers stay on this phone until you press Send to coach, and only go where you send them. The plan is built off this, so the honest version is the useful one.",
+  "submit": "Save and send to coach",
+  "after": "Pressing the button saves your answers and opens the share sheet so you can send them straight to Mitch.",
+  "sections": [
+   {
+    "title": "You",
+    "fields": [
+     {
+      "k": "name",
+      "label": "Your name",
+      "req": true
+     },
+     {
+      "k": "suburb",
+      "label": "Where you run from (suburb)"
+     },
+     {
+      "k": "days",
+      "label": "Which days and times can you train?",
+      "hint": "e.g. Mon/Wed/Fri 5:30am, Sat morning",
+      "req": true,
+      "type": "textarea"
+     },
+     {
+      "k": "perweek",
+      "label": "How many days a week is realistic?",
+      "type": "select",
+      "options": [
+       "2",
+       "3",
+       "4",
+       "5"
+      ],
+      "req": true
+     }
+    ]
+   },
+   {
+    "title": "Running right now",
+    "fields": [
+     {
+      "k": "history",
+      "label": "How long have you been running, and what did the last few months look like?",
+      "type": "textarea",
+      "req": true
+     },
+     {
+      "k": "longest",
+      "label": "Longest run in the last month (km)",
+      "req": true
+     },
+     {
+      "k": "typical",
+      "label": "A typical run: distance and roughly how long it takes"
+     },
+     {
+      "k": "where",
+      "label": "Treadmill or outside, mostly?",
+      "type": "select",
+      "options": [
+       "Treadmill",
+       "Outside",
+       "Both"
+      ]
+     },
+     {
+      "k": "watch",
+      "label": "What do you record runs with?",
+      "type": "select",
+      "options": [
+       "Apple Watch",
+       "Garmin",
+       "Phone only",
+       "Nothing"
+      ],
+      "req": true
+     },
+     {
+      "k": "strava",
+      "label": "Do you have Strava?",
+      "type": "select",
+      "options": [
+       "Yes",
+       "No"
+      ]
+     },
+     {
+      "k": "other",
+      "label": "Other exercise you do each week (classes, gym, swimming, bike)",
+      "type": "textarea"
+     }
+    ]
+   },
+   {
+    "title": "Your body",
+    "fields": [
+     {
+      "k": "injury",
+      "label": "Current injuries or niggles, and how bad out of 10 right now",
+      "type": "textarea",
+      "req": true
+     },
+     {
+      "k": "podiatrist",
+      "label": "What has the podiatrist or physio told you to do, and not do?",
+      "type": "textarea",
+      "req": true
+     },
+     {
+      "k": "helps",
+      "label": "What helps most when it flares?",
+      "type": "textarea"
+     },
+     {
+      "k": "medical",
+      "label": "Anything else medical the coach should know",
+      "hint": "optional",
+      "type": "textarea"
+     }
+    ]
+   },
+   {
+    "title": "The goal",
+    "fields": [
+     {
+      "k": "finish",
+      "label": "What does finishing look like to you?",
+      "type": "select",
+      "options": [
+       "Jog the whole thing",
+       "Jog with walk breaks",
+       "Just get round, walking is fine"
+      ],
+      "req": true
+     },
+     {
+      "k": "why",
+      "label": "Why this race?",
+      "type": "textarea"
+     },
+     {
+      "k": "worry",
+      "label": "What are you most worried about?",
+      "type": "textarea"
+     },
+     {
+      "k": "win",
+      "label": "What would make it a win, apart from finishing?"
+     }
+    ]
+   },
+   {
+    "title": "Life",
+    "fields": [
+     {
+      "k": "sleep",
+      "label": "Sleep: how many hours, and how broken?"
+     },
+     {
+      "k": "blockers",
+      "label": "What gets in the way of training?",
+      "type": "textarea"
+     },
+     {
+      "k": "shoes",
+      "label": "Shoes you run in (brand and model if you know it)"
+     }
+    ]
+   }
+  ]
+ },
+ "setup_html": "<div class=\"card\"><h2>Apple Watch → this app</h2>\n  <p class=\"small\">Apple Watch runs reach this app through Strava then intervals.icu. Once set up it is automatic.</p>\n  <ol class=\"small\" style=\"margin:8px 0 0 18px;line-height:1.7\">\n  <li>Record runs with the Apple Watch <b>Workout</b> app (Indoor Run or Outdoor Run).</li>\n  <li>Strava app → Settings → Manage Apps and Devices → Health → <b>Automatic Uploads</b> on.</li>\n  <li>intervals.icu → Settings → connect <b>Strava</b>.</li>\n  <li>intervals.icu → Settings → Developer Settings → copy the API key and Athlete ID into the boxes above.</li></ol></div>"
+};
+const NW = ATHLETE.weeks, SP = ATHLETE.store_prefix;
+const START = ATHLETE.start, RACE = ATHLETE.race;
+const ROUTES = ATHLETE.routes;
+const ICONS={
+ Today:'<circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/>',
+ Week:'<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+ Plan:'<rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/>',
+ Strength:'<path d="M2 12h3M19 12h3M8 12h8"/><rect x="5" y="7" width="3" height="10" rx="1"/><rect x="16" y="7" width="3" height="10" rx="1"/>',
+ Content:'<path d="M15 8l6-3v14l-6-3z"/><rect x="3" y="6" width="12" height="12" rx="2"/>',
+ Progress:'<path d="M3 21h18"/><path d="M4 17l5-6 4 3 6-8"/>',
+ Rules:'<path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/>',
+ Sync:'<path d="M20 8a8 8 0 0 0-14-2M4 16a8 8 0 0 0 14 2"/><path d="M20 3v5h-5M4 21v-5h5"/>'};
+function ringSVG(pct,center,sub){ const r=34,c=2*Math.PI*r,off=c*(1-Math.min(1,Math.max(0,pct)));
+ return `<svg class="hr-ring" width="92" height="92" viewBox="0 0 92 92"><circle cx="46" cy="46" r="${r}" fill="none" stroke="var(--grid)" stroke-width="9"/><circle cx="46" cy="46" r="${r}" fill="none" stroke="url(#ringg)" stroke-width="9" stroke-linecap="round" stroke-dasharray="${c}" stroke-dashoffset="${off}" transform="rotate(-90 46 46)"/><defs><linearGradient id="ringg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FF7A3D"/><stop offset="100%" stop-color="#E8430E"/></linearGradient></defs><text x="46" y="44" text-anchor="middle" font-size="17" font-weight="800" fill="var(--ink)">${center}</text><text x="46" y="60" text-anchor="middle" font-size="8.5" font-weight="700" fill="var(--muted)" letter-spacing=".08em">${sub}</text></svg>`; }
+const TABS = ATHLETE.tabs;
+// ---------- state ----------
+const store = {
+  get logs(){ try{return JSON.parse(localStorage.getItem(SP+"_logs")||"{}")}catch(e){return {}} },
+  set logs(v){ localStorage.setItem(SP+"_logs", JSON.stringify(v)) },
+  get str(){ try{return JSON.parse(localStorage.getItem(SP+"_str")||"{}")}catch(e){return {}} },
+  set str(v){ localStorage.setItem(SP+"_str", JSON.stringify(v)) },
+  get acts(){ try{return JSON.parse(localStorage.getItem(SP+"_acts")||"[]")}catch(e){return []} },
+  set acts(v){ localStorage.setItem(SP+"_acts", JSON.stringify(v)) },
+  get well(){ try{return JSON.parse(localStorage.getItem(SP+"_well")||"[]")}catch(e){return []} },
+  set well(v){ localStorage.setItem(SP+"_well", JSON.stringify(v)) },
+  get exh(){ try{return JSON.parse(localStorage.getItem(SP+"_exh")||"{}")}catch(e){return {}} },
+  set exh(v){ localStorage.setItem(SP+"_exh", JSON.stringify(v)) },
+  get moves(){ try{return JSON.parse(localStorage.getItem(SP+"_moves")||"{}")}catch(e){return {}} },
+  set moves(v){ localStorage.setItem(SP+"_moves", JSON.stringify(v)) },
+  get shots(){ try{return JSON.parse(localStorage.getItem(SP+"_shots")||"{}")}catch(e){return {}} },
+  set shots(v){ localStorage.setItem(SP+"_shots", JSON.stringify(v)) },
+  get intake(){ try{return JSON.parse(localStorage.getItem(SP+"_intake")||"{}")}catch(e){return {}} },
+  set intake(v){ localStorage.setItem(SP+"_intake", JSON.stringify(v)) },
+  get cfg(){ try{return JSON.parse(localStorage.getItem(SP+"_cfg")||"{}")}catch(e){return {}} },
+  set cfg(v){ localStorage.setItem(SP+"_cfg", JSON.stringify(v)) },
+};
+let tab = location.hash ? location.hash.slice(1) : "Today";
+if(!TABS.includes(tab)) tab = "Today";
+let planWk = null; let dayView = null;
+// ---------- helpers ----------
+const $ = s => document.querySelector(s);
+const esc = s => String(s??"").replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const iso = d => { const z=n=>String(n).padStart(2,"0"); return d.getFullYear()+"-"+z(d.getMonth()+1)+"-"+z(d.getDate()); };
+const todayISO = () => iso(new Date());
+const dayDiff = (a,b) => Math.round((new Date(b+"T12:00")-new Date(a+"T12:00"))/864e5);
+const weekOf = date => Math.floor(dayDiff(START,date)/7)+1;
+const fmtT = s => { if(s==null||isNaN(s))return "—"; s=Math.round(s); const h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60;
+  return h? h+":"+String(m).padStart(2,"0")+":"+String(x).padStart(2,"0") : m+":"+String(x).padStart(2,"0"); };
+const fmtPace = spk => { if(!spk||!isFinite(spk))return "—"; const m=Math.floor(spk/60),s=Math.round(spk%60); return m+":"+String(s).padStart(2,"0")+"/km"; };
+const parseT = str => { if(!str) return null; const p=str.trim().split(":").map(Number); if(p.some(isNaN))return null;
+  return p.length===3? p[0]*3600+p[1]*60+p[2] : p.length===2? p[0]*60+p[1] : p[0]; };
+const phaseColor = ph => ({0:"#898781",1:"#1baf7a",2:"#2a78d6",3:"#eb6834",4:"#e87ba4",5:"#4a3aa7"})[parseInt(ph)]||"#898781";
+function tipShow(e, html){ const t=$("#tip"); t.innerHTML=html; t.style.display="block";
+  const x=Math.min(e.clientX+12, innerWidth-t.offsetWidth-8), y=Math.max(8,e.clientY-t.offsetHeight-10);
+  t.style.left=x+"px"; t.style.top=y+"px"; }
+function tipHide(){ $("#tip").style.display="none"; }
+document.addEventListener("scroll", tipHide, true);
+// ---------- goal chain (from the program doc) ----------
+const CHAIN = ATHLETE.chain||null;
+function chain(fiveK){
+  const c=CHAIN; if(!c) return [null,null]; if(fiveK>=c[0][0]){ const r=fiveK/c[0][0]; return [c[0][1]*r, c[0][2]*r]; }
+  if(fiveK<=c[3][0]){ const r=fiveK/c[3][0]; return [c[3][1]*r, c[3][2]*r]; }
+  for(let i=0;i<3;i++){ const a=c[i],b=c[i+1];
+    if(fiveK<=a[0]&&fiveK>=b[0]){ const f=(a[0]-fiveK)/(a[0]-b[0]);
+      return [a[1]+f*(b[1]-a[1]), a[2]+f*(b[2]-a[2])]; } }
+  return [null,null];
+}
+const TT_MARKERS = ATHLETE.tt_markers||{};
+// ---------- data joins ----------
+let MV = {};
+function sessionsOn(date){ return SESSIONS.filter(s=>(MV[s.id]||s.date)===date); }
+function swapDays(a,b){
+  const mv=store.moves;
+  SESSIONS.forEach(s=>{
+    const cur=mv[s.id]||s.date;
+    if(cur===a){ if(b===s.date) delete mv[s.id]; else mv[s.id]=b; }
+    else if(cur===b){ if(a===s.date) delete mv[s.id]; else mv[s.id]=a; }
+  });
+  store.moves=mv; MV=mv; render();
+}
+function resetSwaps(wk){
+  const mv=store.moves;
+  SESSIONS.forEach(s=>{ if(s.week===wk) delete mv[s.id]; });
+  store.moves=mv; MV=mv; render();
+}
+function runSessions(wk){ return SESSIONS.filter(s=>s.week===wk && s.type!=="strength"); }
+function actsOn(date){ return store.acts.filter(a=>a.date===date && a.run); }
+function weekActual(wk){
+  const mon = new Date(START+"T12:00"); mon.setDate(mon.getDate()+(wk-1)*7);
+  let km=0, vert=0, secs=0, n=0;
+  for(let i=0;i<7;i++){ const d=iso(new Date(mon.getTime()+i*864e5));
+    const acts=actsOn(d);
+    if(acts.length){ for(const a of acts){ km+=a.km; vert+=a.vert||0; secs+=a.secs||0; n++; } }
+    else { for(const s of sessionsOn(d)){
+      if(s.type==="strength"||s.type==="cond"||s.type==="rest") continue;
+      const l=store.logs[s.id];
+      if(l&&l.completed){ km+=(l.km??s.km)||0; secs+=l.time||0; vert+=s.vert||0; n++; }
+      else if(s.done){ km+=s.km||0; secs+=(s.id===1?1666:0); n++; }
+    } }
+  }
+  return {km,vert,secs,n};
+}
+function loggedTTs(){
+  const out=[];
+  for(const s of SESSIONS){ if(!s.is_test) continue; const l=store.logs[s.id];
+    if(s.id===1){ out.push({week:1,date:s.date,secs:1600,label:"est. from 90% baseline"}); continue; }
+    if(l && l.time){ out.push({week:s.week,date:s.date,secs:l.time,label:"TT"}); } }
+  return out;
+}
+function latest5k(){ const t=loggedTTs(); return t.length? t[t.length-1] : null; }
+// ---------- analysis ----------
+function easyDiscipline(){
+  // check synced activities matched to easy/recovery days: pace >= 6:35/km OR HR < 138
+  let ok=0, tot=0, worst=[];
+  for(const s of SESSIONS){
+    if(s.type!=="easy") continue;
+    for(const a of actsOn(s.date)){
+      if(a.km<2) continue; tot++;
+      const pace=a.secs&&a.km? a.secs/a.km : null;
+      const good=(pace!==null&&pace>=ATHLETE.easy.pace_spk)||(a.hr&&a.hr<ATHLETE.easy.hr);
+      if(good) ok++; else worst.push(s.date);
+    }
+  }
+  return {ok,tot,worst:worst.slice(-3)};
+}
+function verdicts(){
+  const v=[]; const t=todayISO(); const wk=Math.min(NW,Math.max(1,weekOf(t)));
+  // volume compliance, last 4 completed weeks
+  let comp=[], target=0, actual=0;
+  for(let w=Math.max(1,wk-4); w<wk; w++){ const a=weekActual(w); target+=WEEKS[w].km; actual+=a.km; }
+  if(target>0){
+    const pct=Math.round(100*actual/target);
+    const lvl = pct>=90&&pct<=115?"good":pct>=75?"warn":pct>115?"serious":"serious";
+    v.push({lvl, t:`Volume: ${pct}% of plan over the last ${Math.min(4,wk-1)} week(s)`,
+      p: pct>115? "Over plan. Ambition goes into execution quality, never the loading curve — the ramp is the injury risk."
+       : pct>=90? "On the loading curve. Down weeks stay as written."
+       : pct>=75? "A little under. Fine if it was a deliberate absorb; flag it if sessions are silently dropping."
+       : "Well under plan. If two consecutive sessions felt wrong, take the down week early — otherwise re-anchor this week."});
+  } else v.push({lvl:"good",t:"Week 1 of "+NW,p:"Volume verdicts start once a full week is banked."});
+  // easy discipline
+  const e=easyDiscipline();
+  if(e.tot>0){ const pct=Math.round(100*e.ok/e.tot);
+    v.push({lvl:pct>=80?"good":pct>=60?"warn":"crit", t:`Easy-day discipline: ${pct}% truly easy (${e.ok}/${e.tot})`,
+      p:pct>=80? "Easy days are actually easy. This is the single biggest determinant of the program working."
+        : ATHLETE.easy.drift_text});
+  } else v.push({lvl:"warn",t:"Easy-day discipline: no synced data yet",p:"Connect intervals.icu in Sync so easy-day pace/HR gets checked automatically."});
+  // TT trajectory
+  const tt=latest5k();
+  if(tt&&CHAIN){ const mk=TT_MARKERS[tt.week]||null; const [f10,bw]=chain(tt.secs);
+    let s=`Current 5km ${fmtT(tt.secs)} → flat 10km ~${fmtT(f10)} → ${ATHLETE.race_short} ~${fmtT(bw)}`;
+    let lvl="good", p="";
+    if(mk){ const d=tt.secs-mk;
+      lvl = d<=10?"good": d<=45?"warn":"serious";
+      p = d<=10? `On or ahead of the 21:30 chain (marker for week ${tt.week}: ${fmtT(mk)}). Podium live.`
+        : d<=45? `${d}s behind the week-${tt.week} marker (${fmtT(mk)}). Within reach — hold the plan, don't add load.`
+        : `${Math.round(d)}s behind the marker. Progress gate rule: adjust the target, not the effort.`; }
+    v.push({lvl,t:s,p});
+  }
+  // wellness flag
+  const w=store.well.slice(-7).filter(x=>x.restingHR);
+  const base=store.well.slice(-42,-7).filter(x=>x.restingHR);
+  if(w.length>=3&&base.length>=10){
+    const avg7=w.reduce((a,x)=>a+x.restingHR,0)/w.length, avgB=base.reduce((a,x)=>a+x.restingHR,0)/base.length;
+    if(avg7>avgB+4) v.push({lvl:"serious",t:`Resting HR elevated: ${avg7.toFixed(0)} vs ${avgB.toFixed(0)} baseline`,
+      p:"Classic under-recovery signal. Drop Friday's run this week and keep easy days honest. If it persists 3+ more days, pull the down week forward."});
+    else v.push({lvl:"good",t:`Resting HR steady (${avg7.toFixed(0)} vs ${avgB.toFixed(0)} baseline)`,p:"Recovering well at current load."});
+  }
+  return v;
+}
+// ---------- render ----------
+function render(){
+  MV=store.moves;
+  location.hash=tab;
+  $("#nav").innerHTML = TABS.map(t=>`<button class="${t===tab?'on':''}" onclick="go('${t}')"><svg viewBox="0 0 24 24">${ICONS[t]}</svg>${t}</button>`).join("");
+  const t=todayISO();
+  $("#cd").textContent = Math.max(0,dayDiff(t,RACE));
+  const wk=weekOf(t);
+  const wkm = WEEKS[Math.min(NW,Math.max(1,wk))];
+  $("#chips").innerHTML = `<span class="chip acc">Week ${Math.min(NW,Math.max(1,wk))} of ${NW} · Phase ${wkm?esc(wkm.phase):""}</span>
+    ${wkm&&wkm.down?'<span class="chip">DOWN WEEK · not optional</span>':""}
+    <span class="chip">${wkm?wkm.km+"km · "+wkm.vert+"m vert this week":""}</span>`;
+  const R={Today:rToday,Week:rWeek,Plan:rPlan,Strength:rStrength,Content:rContent,Progress:rProgress,Rules:rRules,Sync:rSync};
+  $("#main").innerHTML = (tab==="Today"&&dayView)? rDayView(dayView) : R[tab]();
+  if(tab==="Progress") drawCharts();
+}
+function go(t){ tab=t; planWk=null; dayView=null; render(); window.scrollTo(0,0); }
+// ---------- Today ----------
+function sessionCard(s, expanded){
+  const l=store.logs[s.id]||{}; const done=l.completed||s.done; const act0=actsOn(s.date)[0];
+  const pills = (done?'<span class="pill done">DONE</span>':"") + (s.is_night?'<span class="pill night">NIGHT</span>':"")
+    + (s.is_test?'<span class="pill test">TEST</span>':"") + (s.is_race?'<span class="pill race">RACE</span>':"")
+    + (s.is_down?'<span class="pill down">DOWN WK</span>':"")
+    + (l.loc?'<span class="pill loc">'+(l.loc==="tm"?"TREADMILL":"OUTSIDE")+'</span>':"");
+  const meta=[s.km?s.km+"km":null, s.vert?s.vert+"m vert":null].filter(Boolean).join(" · ");
+  let logForm="";
+  if(!s.exercises&&s.type!=="rest"&&!s.done){
+    logForm = `<div class="row" style="margin-top:8px">
+      <label class="f">km<input type="number" step="0.1" id="lk${s.id}" value="${l.km ?? (act0? act0.km.toFixed(2) : (s.km ?? ""))}"></label>
+      <label class="f">time (mm:ss)<input style="width:86px" id="lt${s.id}" value="${l.time? fmtT(l.time) : (act0? fmtT(act0.secs) : "")}"></label>
+      <label class="f">avg HR<input type="number" id="lh${s.id}" value="${l.hr ?? (act0&&act0.hr? Math.round(act0.hr) : "")}"></label>
+      <label class="f">RPE 1-10<input type="number" min="1" max="10" id="lr${s.id}" value="${l.rpe??""}"></label>
+    </div>
+    <div class="row" style="margin-top:6px">
+      <input placeholder="notes / niggles" id="ln${s.id}" style="flex:1" value="${esc(l.notes||"")}">
+      <button class="btn ${savedFlash===s.id?"saved":""}" onclick="saveLog(${s.id})">${savedFlash===s.id?"\u2713 Saved":(done?"Update":"Complete")}</button>
+      ${done?`<button class="ghost" onclick="unLog(${s.id})">Undo</button>`:""}
+    </div>`;
+  }
+  if(s.exercises){
+    const exh=store.exh;
+    logForm = `<div class="exlist">` + s.exercises.map((e,i)=>{
+      const sv=(l.ex&&l.ex[i])||{};
+      const hist=(exh[e.k]||[]).filter(x=>x.load!=null);
+      const last=hist.length? hist[hist.length-1] : null;
+      const nsets=e.sets||3, csets=sv.sets||0, wsets=sv.wsets||0;
+      const dots=Array.from({length:nsets},(_,d)=>`<i class="${d<Math.min(csets,nsets)?"on":""}"></i>`).join("")+(csets>nsets?`<em>+${csets-nsets}</em>`:"");
+      return `<div class="exrow">
+        <input type="checkbox" id="exd${s.id}_${i}" ${sv.done?"checked":""} onchange="toggleEx(${s.id},${i},this.checked)">
+        <div class="exn"><b>${esc(e.name)}</b><span>${esc(e.scheme)}${e.note?" · "+esc(e.note):""}</span></div>
+        <div class="setcol">
+          <button class="setbtn ${csets>=nsets?"fin":""}" onclick="doneSet(${s.id},${i})">
+            <span class="dots">${dots}</span>${csets>=nsets?"done · +1":"set "+(csets+1)+"/"+nsets+" ✓"}</button>
+          <div class="setrow">
+            <button class="minib ${wsets>0?"won":""}" onclick="wuSet(${s.id},${i})" title="log a warm-up set">${wsets>0?"W×"+wsets:"W+"}</button>
+            <button class="minib" onclick="decSet(${s.id},${i})" title="undo a set">−</button>
+            ${parseDur(e.scheme)?`<button class="minib tclr" onclick="startExTimer(${s.id},${i})">⏱${durLbl(parseDur(e.scheme))}</button>`:""}
+          </div>
+        </div>
+        ${e.load?`<div class="exl"><input class="w" type="number" step="0.5" id="exw${s.id}_${i}" value="${sv.load ?? (last? last.load : "")}" placeholder="kg"><span class="exlast">${last?"last "+last.load+"kg":"first time"}</span></div>`:""}
+      </div>`;
+    }).join("") + `</div>
+    <div class="row" style="margin-top:9px">
+      <input placeholder="notes (form cues, niggles)" id="ln${s.id}" style="flex:1" value="${esc(l.notes||"")}">
+      <label class="f">RPE 1-10<input type="number" min="1" max="10" id="lr${s.id}" value="${l.rpe??""}"></label>
+      <button class="btn ${savedFlash===s.id?"saved":""}" onclick="saveStr(${s.id})">${savedFlash===s.id?"\u2713 Saved":(done?"Update":"Save session")}</button>
+    </div>`;
+  }
+  const wucd = (sec,label,icon,key)=>{
+    if(!sec) return "";
+    const st=(l[key]||[]); const ext=(l[key+"x"]||[]);
+    const LIB=key==="wu"? LIB_WU : LIB_CD;
+    const n=sec.items.length, c=st.filter(Boolean).length;
+    const tot=n+ext.length, ctot=c+ext.filter(x=>x&&x.done).length;
+    const open=openSec.has(s.id+key)||(ctot>0&&ctot<tot);
+    const baseRows=sec.items.map((x,i)=>
+      `<div class="wurow tmrrow"><label class="wl"><input type="checkbox" ${st[i]?"checked":""} onchange="tickWU(${s.id},'${key}',${i},this.checked)"><div><b>${esc(x[0])}</b>${x[1]?` <span class="dose">${esc(x[1])}</span>`:""}<p>${esc(x[2])}</p></div></label>${parseDur(x[1])?`<button class="tmr" onclick="startWuTimer(${s.id},'${key}',${i},false)">⏱ ${durLbl(parseDur(x[1]))}</button>`:""}</div>`).join("");
+    const extRows=ext.map((x,i)=>{ const e=LIB.find(z=>z[0]===x.k); if(!e) return "";
+      return `<div class="wurow added"><label class="wl"><input type="checkbox" ${x.done?"checked":""} onchange="tickWUX(${s.id},'${key}',${i},this.checked)"><div><b>${esc(e[1])}</b> <span class="dose">${esc(e[2])}</span><p>${esc(e[3])}</p></div></label>${parseDur(e[2])?`<button class="tmr" onclick="startWuTimer(${s.id},'${key}',${i},true)">⏱ ${durLbl(parseDur(e[2]))}</button>`:""}<button class="rmx" onclick="rmWUX(${s.id},'${key}',${i})">✕</button></div>`; }).join("");
+    const chips=LIB.filter(e=>!ext.some(x=>x.k===e[0])).map(e=>
+      `<button class="ghost lib" onclick="addWUX(${s.id},'${key}','${e[0]}')">${esc(e[1])} <span>${esc(e[2])}</span></button>`).join("");
+    return `<details class="wucd"${open?" open":""}><summary>${icon} ${label} · ~${sec.mins} min · <span class="wuc${ctot>=tot&&tot>0?" ok":""}" id="wuc${s.id}_${key}">${ctot}/${tot}${ctot>=tot&&tot>0?" ✓":""}</span></summary>${baseRows}${extRows}
+    <details class="addpick"><summary>＋ add exercise (felt cold? grab one)</summary><div class="libchips">${chips||'<span class="small">all added</span>'}</div></details></details>`;
+  };
+  const acts=actsOn(s.date);
+  const actHtml = (s.type!=="strength"&&acts.length)? `<p class="small" style="margin-top:6px">${ATHLETE.device}: ${acts.map(a=>`${a.km.toFixed(1)}km · ${fmtT(a.secs)} · ${fmtPace(a.secs/a.km)}${a.hr?" · "+Math.round(a.hr)+"bpm":""}${a.vert?" · "+Math.round(a.vert)+"m":""}`).join(" | ")}</p>` : "";
+  let rtBlock="";
+  const rt = ROUTES[s.route];
+  if(rt){
+    const shown = (l.loc==="tm" && s.route!=="race") ? ROUTES.belt : rt;
+    rtBlock = `<div class="rtnote"><span class="rtico">${shown.ico}</span><div>
+      <span class="rtlbl">WHERE</span><b>${esc(shown.name)}</b>
+      <p>${esc(s.route_note && shown===rt ? s.route_note : shown.desc)}</p></div></div>`;
+  }
+  let locBlock="";
+  if(s.opt_out||s.opt_tm){
+    const brief = l.loc==="tm" ? s.opt_tm : (l.loc==="out" ? s.opt_out : null);
+    const hrParts = (s.hr_note||"").split("||");
+    const hrMain = (hrParts[0]||"").trim();
+    const hrCaveat = (hrParts[1]||"").trim();
+    locBlock = `<div class="locwrap">
+      <button class="locbtn ${l.loc==="out"?"on":""}" onclick="setLoc(${s.id},'out')">🌳 Outside</button>
+      <button class="locbtn ${l.loc==="tm"?"on":""}" onclick="setLoc(${s.id},'tm')">🏃 Treadmill</button>
+    </div>` + (brief? `<div class="brief">${esc(brief)}</div>`
+                    : `<p class="small" style="margin:6px 2px 0">Pick one to see the short version.</p>`)
+      + (hrMain? `<div class="hrnote"><span class="hrlbl">\u2665 HEART RATE</span><p>${esc(hrMain)}</p>${
+          hrCaveat? `<details class="hrwhy"><summary>Why "~"?</summary><p>${esc(hrCaveat)}</p></details>`:""}</div>`:"");
+  }
+  return `<div class="card"><div>${pills}</div>
+    <h3>${esc(s.title)}</h3>
+    ${meta?`<p class="small">${meta}${s.type!=="strength"?" planned":""}</p>`:""}
+    ${rtBlock}
+    ${locBlock}
+    <details class="fullpres"><summary>Full detail</summary><p class="pres">${esc(s.prescription)}</p></details>
+    ${wucd(s.wu,"Warm-up","↗","wu")}${logForm}${wucd(s.cd,"Cool-down","↘","cdd")}${actHtml}</div>`;
+}
+function rContent(){
+  const wk=Math.min(NW,Math.max(1,weekOf(todayISO())));
+  const c=CONTENT[wk];
+  const brief = `<div class="card"><h2>The vlog brief</h2>
+    <p class="small">The standing brief: the story, the kit, the weekly rhythm, the shots that carry an episode, and the arc through to race night. It does not change week to week, so read it once.</p>
+    <p style="margin-top:10px"><a class="briefl" href="vlog.html">Open the vlog brief &rarr;</a>
+    <a class="briefl alt" href="catchup.html">Weeks 1-6 catch-up &rarr;</a></p></div>`;
+  if(!c) return `<div class="card"><p class="ctnone">Week ${wk} has no content pack yet. They get written at the weekly review once the week has actually happened, so this fills in as you go. The standing brief below is always here.</p></div>` + brief;
+  const done=store.shots||{};
+  const shots=c.shots.map((s,i)=>{
+    const k=wk+"_"+i, on=!!done[k];
+    return `<label class="ctshot ${on?"done":""}"><input type="checkbox" ${on?"checked":""} onchange="tickShot('${k}',this.checked)"><span>${esc(s)}</span></label>`;
+  }).join("");
+  const talk=c.talk.map(x=>`<div class="cttalk">${esc(x)}</div>`).join("");
+  const log=c.log.map(x=>`<div class="ctlog"><b>${esc(x[0])}</b><p>${esc(x[1])}</p></div>`).join("");
+  const n=c.shots.length, got=c.shots.filter((s,i)=>done[wk+"_"+i]).length;
+  const briefCard = `<div class="card"><h2>The vlog brief</h2>
+    <p class="small">The standing brief: the story, the kit, the weekly rhythm, the shots that carry an episode, and the arc through to race night. Read it once, then live off the weekly pack above.</p>
+    <p style="margin-top:10px"><a class="briefl" href="vlog.html">Open the vlog brief &rarr;</a>
+    <a class="briefl alt" href="catchup.html">Weeks 1-6 catch-up &rarr;</a></p></div>`;
+  return `<div class="card">
+    <div class="cthead"><span class="ctlbl" style="color:var(--muted)">WEEK ${wk} &middot; ${esc(c.range)}</span>
+      <h2>${esc(c.headline)}</h2><p>${got} of ${n} shots captured</p></div>
+    <div class="ctsec"><span class="ctlbl">Shots to get</span>${shots}</div>
+    <div class="ctsec"><span class="ctlbl">Talk about</span>${talk}</div>
+    <div class="ctsec"><span class="ctlbl">What changed this week</span>${log}</div>
+  </div>` + briefCard;
+}
+function tickShot(k,v){ const s=store.shots||{}; if(v)s[k]=1; else delete s[k]; store.shots=s; render(); }
+function rToday(){
+  if(ATHLETE.intake && !store.intake.done) return rIntake();
+  const t=todayISO(); let list=sessionsOn(t);
+  const wkN=Math.min(NW,Math.max(1,weekOf(t))); const wm=WEEKS[wkN]; const wa=weekActual(wkN);
+  const pct=wm? wa.km/wm.km : 0;
+  const cfgS=store.cfg;
+  const syncAge = cfgS.last? Math.round((Date.now()-cfgS.last)/60e3) : null;
+  const syncLine = (!cfgS.key||!cfgS.aid)
+    ? `<div class="syncbar warn"><span>${ATHLETE.device} data is not connected on this device. localStorage is per device, so the phone and the Mac each need setting up once.</span><button class="ghost" onclick="go('Sync')">Set up</button></div>`
+    : `<div class="syncbar"><span>${ATHLETE.device}${syncAge===null?" never synced":(syncAge<2?" synced just now":" synced "+(syncAge<60? syncAge+" min ago" : Math.round(syncAge/60)+"h ago"))}</span><button class="ghost" onclick="maybeSync(true)">Sync now</button></div>`;
+  let head=`<div class="card hero">${ringSVG(pct, Math.round(pct*100)+"%", "WEEK VOL")}
+    <div class="ht"><b>${wa.km.toFixed(1)} of ${wm?wm.km:0}km this week</b>
+    <p>${Math.round(wa.vert)} of ${wm?wm.vert:0}m vert · ${wm?esc(wm.phase):""}${wm&&wm.down?" · DOWN WEEK":""}</p>
+    ${wm&&wm.note?`<p class="small">${esc(wm.note)}</p>`:""}</div></div>${syncLine}
+  <h2 style="font-size:11px;color:var(--muted);margin:2px 2px 8px;letter-spacing:.09em">TODAY — ${new Date().toDateString().toUpperCase()}</h2>`;
+  if(!list.length){
+    const before = t<START;
+    head+=`<div class="card"><h3>${before?ATHLETE.start_label:(t>RACE?"Outside the "+NW+"-week block":"Nothing scheduled today")}</h3></div>`;
+  }
+  let html=head+list.map(s=>sessionCard(s,true)).join("");
+  // tomorrow preview
+  const tm=iso(new Date(Date.now()+864e5)); const nx=sessionsOn(tm);
+  if(nx.length) html+=`<div class="card"><h2>Tomorrow</h2>${nx.map(s=>`<p style="margin:3px 0"><b>${esc(s.title)}</b>${s.km?` <span class="small">${s.km}km</span>`:""}</p>`).join("")}</div>`;
+  // wellness tiles
+  const w=store.well.length? store.well[store.well.length-1] : null;
+  if(w) html+=`<div class="tiles">
+    ${w.restingHR?`<div class="tile"><div class="l">Resting HR</div><div class="v">${w.restingHR}</div></div>`:""}
+    ${w.hrv?`<div class="tile"><div class="l">HRV</div><div class="v">${Math.round(w.hrv)}</div></div>`:""}
+    ${w.sleep?`<div class="tile"><div class="l">Sleep</div><div class="v">${w.sleep.toFixed(1)}h</div></div>`:""}
+  </div>`;
+  // verdicts
+  html+=`<div class="card" style="margin-top:12px"><h2>How am I tracking?</h2>${verdicts().map(v=>
+    `<div class="verdict"><span class="dot" style="background:var(--${v.lvl==="good"?"good":v.lvl==="warn"?"warn":v.lvl==="serious"?"serious":"crit"})"></span><div><b>${esc(v.t)}</b><p>${esc(v.p)}</p></div></div>`).join("")}</div>`;
+  return html;
+}
+let savedFlash=null;
+function flashSaved(id){ savedFlash=id; render(); setTimeout(()=>{ if(savedFlash===id){ savedFlash=null; render(); } },1600); }
+let toastTm=null;
+function toast(msg){
+  const el=$("#toast"); el.innerHTML="<b>\u2713</b>"+msg;
+  el.classList.add("show");
+  if(navigator.vibrate) navigator.vibrate(30);
+  if(toastTm) clearTimeout(toastTm);
+  toastTm=setTimeout(()=>el.classList.remove("show"),1600);
+}
+function setLoc(id,v){
+  const logs=store.logs; const l=logs[id]||{};
+  l.loc = (l.loc===v) ? null : v;
+  logs[id]=l; store.logs=logs; render();
+  toast(l.loc? (v==="tm"?"Treadmill":"Outside") : "Location cleared");
+}
+function saveLog(id){
+  const logs=store.logs; const l=logs[id]||{};
+  l.completed=true; l.km=parseFloat($("#lk"+id).value)||null; l.time=parseT($("#lt"+id).value);
+  l.hr=parseInt($("#lh"+id).value)||null; l.rpe=parseInt($("#lr"+id).value)||null; l.notes=$("#ln"+id).value;
+  l.at=new Date().toISOString(); logs[id]=l; store.logs=logs; flashSaved(id); toast("Session saved");
+}
+const LIB_WU=[
+ ["walklunge","Walking lunges","10 each side","Big step forward, back knee kisses the ground, tall chest. The full lower-body wake-up."],
+ ["sweeps2","Hamstring sweeps","10 total","Heel forward, leg straight, sweep hands past the foot as you rock over it."],
+ ["swingfb2","Leg swings, front-back","10 each leg","Hold a wall, pendulum swings, bigger each rep."],
+ ["swingside2","Leg swings, side-to-side","10 each leg","Across the body and out wide, opens the hips."],
+ ["highknees2","High knees","2 x 20m","Quick steps, knees to hip height, tall posture."],
+ ["buttkick","Butt kicks","2 x 20m","Heels flick to your backside, quick and light."],
+ ["askip2","A-skips","2 x 20m","Rhythmic skip, one knee drives up tall each step."],
+ ["bridge2","Glute bridges","10 slow","Drive hips up, squeeze 2 seconds at the top."],
+ ["clam2","Clamshells","10 each side","Side-lying, knees bent, top knee opens without hips rolling back."],
+ ["bwsquat2","Bodyweight squats","10 slow","Full depth, controlled, arms out front."],
+ ["ankle2","Ankle wall rocks","10 each side","Knee to the wall, heel down."],
+ ["wgs","World's greatest stretch","5 each side","Long lunge, both hands inside the front foot, then rotate and reach up. Hips, hamstrings and back in one move."],
+ ["pogolight","Pogo bounces","2 x 15","Light double-leg bounces on the spot, springy ankles."],
+ ["sideshuffle","Side shuffles","2 x 15m","Low and lateral, wakes up glutes and groin."],
+ ["armcirc","Arm circles + torso twists","20s","For lifting days and cold mornings."],
+ ["latlunge","Lateral lunges","8 each side","Step wide to one side, sit into that hip, trailing leg straight. Opens the groin under a bit of load."],
+ ["cossack","Cossack squats","6 each side","Deep lateral lunge, sitting right down on one side with the other leg straight and the toes up. The strongest groin opener here."],
+ ["addrock","Adductor rockbacks","10 each side","On hands and knees, one leg out straight to the side, rock the hips back and forward. Wakes the inner thigh before speed work."]];
+const LIB_CD=[
+ ["figure4","Figure-4 glute stretch","30s each side","On your back, ankle over the opposite knee, pull the thigh toward you."],
+ ["groincd","Groin / adductor stretch","30s","Wide stance, sink to one side, feel the inner thigh."],
+ ["hamcd","Hamstring step stretch","30s each side","Heel on a low step, straight back, hinge at the hips."],
+ ["childs","Child's pose","45s","Knees wide, sit back to heels, arms long. Lower back release."],
+ ["doorway","Doorway chest stretch","30s","Forearm on the frame, step through. For after upper days."],
+ ["downdog","Down-dog calf pedal","30s","Hips high, pedal the heels one at a time."],
+ ["butterfly","Butterfly stretch","45s","Sit, soles together, heels in, let the knees fall and lean forward from the hips."],
+ ["frogcd","Frog stretch","45s","Knees wide on the floor, shins in line with the thighs, rock the hips back gently. Deep adductor."]];
+const openSec=new Set();
+function durLbl(d){ return d>=60? (Math.round(d/60)+"m") : (d+"s"); }
+function parseDur(str){ if(!str) return null;
+  let m=String(str).match(/(\d+)\s*min/); if(m) return +m[1]*60;
+  m=String(str).match(/(\d+)\s*s/); if(m) return +m[1]; return null; }
+function startWuTimer(id,key,i,isExt){
+  const s=SESSIONS.find(x=>x.id===id); const sec=key==="wu"? s.wu : s.cd; if(!sec) return;
+  let name,dose;
+  if(isExt){ const l=store.logs[id]||{}; const ext=l[key+"x"]||[]; const LIB=key==="wu"? LIB_WU : LIB_CD;
+    const e=LIB.find(z=>z[0]===(ext[i]||{}).k); if(!e) return; name=e[1]; dose=e[2]; }
+  else { const it=sec.items[i]; if(!it) return; name=it[0]; dose=it[1]; }
+  const d=parseDur(dose); if(!d) return;
+  startRest(d, name, /each/.test(dose)? "switch sides, start it again":"done, tick it off", "hold");
+}
+function startExTimer(id,i){
+  const s=SESSIONS.find(x=>x.id===id); const e=s.exercises[i]; const d=parseDur(e.scheme); if(!d) return;
+  startRest(d, e.name, /each/.test(e.scheme)? "switch sides":"hold done, tap set ✓", "hold");
+}
+function wucdCount(id,key){
+  const s=SESSIONS.find(x=>x.id===id); const sec=key==="wu"? s.wu : s.cd; if(!sec) return;
+  const l=store.logs[id]||{}; const st=l[key]||[]; const ext=l[key+"x"]||[];
+  const tot=sec.items.length+ext.length;
+  const c=st.filter(Boolean).length+ext.filter(x=>x&&x.done).length;
+  const el=$("#wuc"+id+"_"+key);
+  if(el){ el.textContent=c+"/"+tot+(c>=tot&&tot>0?" ✓":""); el.classList.toggle("ok",c>=tot&&tot>0); }
+}
+function addWUX(id,key,k){
+  const logs=store.logs; const l=logs[id]||{}; const ext=l[key+"x"]||[];
+  if(!ext.some(x=>x.k===k)) ext.push({k, done:false});
+  l[key+"x"]=ext; logs[id]=l; store.logs=logs; openSec.add(id+key); render();
+}
+function rmWUX(id,key,i){
+  const logs=store.logs; const l=logs[id]||{}; const ext=l[key+"x"]||[];
+  ext.splice(i,1); l[key+"x"]=ext; logs[id]=l; store.logs=logs; openSec.add(id+key); render();
+}
+function tickWUX(id,key,i,checked){
+  const logs=store.logs; const l=logs[id]||{}; const ext=l[key+"x"]||[];
+  if(ext[i]) ext[i].done=checked;
+  l[key+"x"]=ext; logs[id]=l; store.logs=logs; wucdCount(id,key);
+}
+function tickWU(id,key,i,checked){
+  const logs=store.logs; const l=logs[id]||{}; const arr=l[key]||[];
+  arr[i]=checked; l[key]=arr; logs[id]=l; store.logs=logs;
+  wucdCount(id,key);
+}
+let restTimer=null;
+function beep(){
+  try{ const ctx=new (window.AudioContext||window.webkitAudioContext)();
+    [0,0.25,0.5].forEach((d,i)=>{ const os=ctx.createOscillator(), g=ctx.createGain();
+      os.frequency.value=i===2?1320:880; os.connect(g); g.connect(ctx.destination);
+      g.gain.setValueAtTime(0.28, ctx.currentTime+d); g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime+d+0.18);
+      os.start(ctx.currentTime+d); os.stop(ctx.currentTime+d+0.2); });
+  }catch(e){}
+  if(navigator.vibrate) navigator.vibrate([250,120,250]);
+}
+function startRest(secs,label,goText,mode){
+  clearInterval(restTimer&&restTimer.iv);
+  const bar=$("#timerbar");
+  restTimer={end:Date.now()+secs*1000,label,goText,mode:mode||"rest"};
+  bar.classList.remove("hide","go");
+  const tick=()=>{
+    const left=Math.ceil((restTimer.end-Date.now())/1000);
+    if(left<=0){
+      clearInterval(restTimer.iv); beep();
+      bar.classList.add("go");
+      bar.innerHTML=`<b>GO — ${esc(restTimer.goText)}</b><button class="tb" onclick="hideTimer()">✕</button>`;
+      setTimeout(()=>{ if(bar.classList.contains("go")) hideTimer(); }, 30000);
+      return;
+    }
+    const m=Math.floor(left/60), x=left%60;
+    bar.innerHTML=`<b>${m}:${String(x).padStart(2,"0")}</b><span>${restTimer.mode==="hold"?"⏱ hold":"rest"} · ${esc(restTimer.label)} · ${restTimer.mode==="hold"?"then":"next"}: ${esc(restTimer.goText)}</span>
+      <button class="tb" onclick="restTimer.end+=30000">+30s</button>
+      <button class="tb" onclick="hideTimer()">skip</button>`;
+  };
+  tick(); restTimer.iv=setInterval(tick,250);
+}
+function hideTimer(){ if(restTimer) clearInterval(restTimer.iv); $("#timerbar").classList.add("hide"); }
+function captureLoad(id,i,entry,e){
+  const wi=$("#exw"+id+"_"+i);
+  const w=(wi&&wi.value)? (parseFloat(wi.value)||null) : (entry.load??null);
+  entry.load=w;
+  const s=SESSIONS.find(x=>x.id===id); const exh=store.exh;
+  const h=exh[e.k]||[]; const rec={date:s.date, load:e.load? w : null};
+  const j=h.findIndex(x=>x.date===s.date); if(j>=0) h[j]=rec; else h.push(rec);
+  h.sort((a,b)=>a.date<b.date?-1:1); exh[e.k]=h; store.exh=exh;
+}
+function doneSet(id,i){
+  const s=SESSIONS.find(x=>x.id===id); const e=s.exercises[i];
+  const logs=store.logs; const l=logs[id]||{}; l.ex=l.ex||[];
+  const entry=l.ex[i]||{}; const nsets=e.sets||3;
+  const wi0=$("#exw"+id+"_"+i); if(wi0&&wi0.value) entry.load=parseFloat(wi0.value)||entry.load;
+  entry.sets=(entry.sets||0)+1;
+  if(entry.sets>=nsets){ entry.done=true; captureLoad(id,i,entry,e); }
+  const nextEx = entry.sets>nsets ? "extra set banked — +1 for another"
+    : entry.sets===nsets ? (s.exercises[i+1]? s.exercises[i+1].name : "session done — hit Save")
+    : `${e.name} set ${entry.sets+1} of ${nsets}`;
+  if(e.rest>0) startRest(e.rest, e.name, nextEx); else hideTimer();
+  l.ex[i]=entry; l.completed=l.ex.some(x=>x&&x.done); logs[id]=l; store.logs=logs; render();
+}
+function wuSet(id,i){
+  const s=SESSIONS.find(x=>x.id===id); const e=s.exercises[i];
+  const logs=store.logs; const l=logs[id]||{}; l.ex=l.ex||[];
+  const entry=l.ex[i]||{}; entry.wsets=(entry.wsets||0)+1;
+  const wi0=$("#exw"+id+"_"+i); if(wi0&&wi0.value) entry.load=parseFloat(wi0.value)||entry.load;
+  l.ex[i]=entry; logs[id]=l; store.logs=logs;
+  startRest(60, e.name+" (warm-up set)", "another warm-up or first work set");
+  render();
+}
+function decSet(id,i){
+  const s=SESSIONS.find(x=>x.id===id); const e=s.exercises[i]; const nsets=e.sets||3;
+  const logs=store.logs; const l=logs[id]||{}; l.ex=l.ex||[];
+  const entry=l.ex[i]||{};
+  if((entry.sets||0)>0) entry.sets--; else if((entry.wsets||0)>0) entry.wsets--;
+  entry.done=(entry.sets||0)>=nsets;
+  l.ex[i]=entry; l.completed=l.ex.some(x=>x&&x.done); logs[id]=l; store.logs=logs; render();
+}
+function toggleEx(id,i,checked){
+  const s=SESSIONS.find(x=>x.id===id); const e=s.exercises[i];
+  const logs=store.logs; const l=logs[id]||{}; l.ex=l.ex||[];
+  const entry=l.ex[i]||{}; entry.done=checked; entry.sets=checked? (e.sets||3) : 0;
+  if(checked) captureLoad(id,i,entry,e);
+  l.ex[i]=entry; l.completed=l.ex.some(x=>x&&x.done); logs[id]=l; store.logs=logs; render();
+}
+function saveStr(id){
+  const s=SESSIONS.find(x=>x.id===id);
+  const logs=store.logs; const l=logs[id]||{}; const exh=store.exh;
+  const prev=l.ex||[];
+  l.ex=(s.exercises||[]).map((e,i)=>{
+    const cb=$("#exd"+id+"_"+i); const wi=$("#exw"+id+"_"+i);
+    const done=cb? cb.checked : false;
+    const w=wi? (parseFloat(wi.value)||null) : null;
+    const sets=(prev[i]&&prev[i].sets)|| (done? (e.sets||3):0);
+    const wsets=(prev[i]&&prev[i].wsets)||0;
+    if(done){ const h=exh[e.k]||[]; const entry={date:s.date, load:e.load? w : null};
+      const j=h.findIndex(x=>x.date===s.date);
+      if(j>=0) h[j]=entry; else h.push(entry);
+      h.sort((a,b)=>a.date<b.date?-1:1); exh[e.k]=h; }
+    return {done, load:w, sets, wsets};
+  });
+  l.completed=l.ex.some(x=>x.done);
+  l.notes=$("#ln"+id)?$("#ln"+id).value:""; l.rpe=$("#lr"+id)? (parseInt($("#lr"+id).value)||null):null;
+  l.at=new Date().toISOString(); logs[id]=l; store.logs=logs; store.exh=exh; flashSaved(id); toast("Session saved");
+}
+function sparkline(vals){
+  if(vals.length<2) return "";
+  const w=104,h=26,mn=Math.min(...vals),mx=Math.max(...vals),rg=(mx-mn)||1;
+  const pts=vals.map((v,i)=>[(4+(w-8)*i/(vals.length-1)).toFixed(1),(h-5-(h-10)*(v-mn)/rg).toFixed(1)]);
+  return `<svg class="spark" width="${w}" height="${h}"><polyline points="${pts.map(p=>p.join(",")).join(" ")}" fill="none" stroke="var(--s1)" stroke-width="2" stroke-linecap="round"/><circle cx="${pts[pts.length-1][0]}" cy="${pts[pts.length-1][1]}" r="3" fill="var(--s1)"/></svg>`;
+}
+function unLog(id){ const logs=store.logs; if(logs[id]) logs[id].completed=false; store.logs=logs; render(); toast("Marked not done"); }
+// ---------- Week ----------
+function rWeek(wk){
+  const t=todayISO(); wk = planWk || Math.min(NW,Math.max(1,weekOf(t)));
+  const m=WEEKS[wk]; const a=weekActual(wk);
+  const monD=new Date(START+"T12:00"); monD.setDate(monD.getDate()+(wk-1)*7);
+  let html=`<div class="row" style="margin:4px 0 10px">
+    <button class="ghost" onclick="planWk=${Math.max(1,wk-1)};render()">‹</button>
+    <b style="flex:1;text-align:center">Week ${wk} · ${esc(m.phase)}${m.down?" · DOWN":""}</b>
+    <button class="ghost" onclick="planWk=${Math.min(NW,wk+1)};render()">›</button></div>`;
+  if(m.note) html+=`<p class="small" style="margin:0 2px 8px">${esc(m.note)}</p>`;
+  html+=`<div class="card"><div class="row" style="justify-content:space-between"><span class="small">Volume: <b>${a.km.toFixed(1)}</b> / ${m.km}km target</span><span class="small">Vert: <b>${Math.round(a.vert)}</b> / ${m.vert}m</span></div>
+    <div class="bar"><i style="width:${Math.min(100,100*a.km/m.km)}%"></i></div>
+    <div class="bar"><i style="width:${Math.min(100,100*a.vert/Math.max(1,m.vert))}%;" class="alt"></i></div></div>`;
+  html+=`<div class="card">`;
+  for(let i=0;i<7;i++){
+    const d=iso(new Date(monD.getTime()+i*864e5)); const dt2=new Date(d+"T12:00");
+    const dn=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"][dt2.getDay()];
+    const all=sessionsOn(d); const runs2=all.filter(x=>x.type!=="strength"); const lifts2=all.filter(x=>x.type==="strength");
+    const main=runs2[0]||lifts2[0];
+    if(!main){ html+=`<div class="day" onclick="openDay('${d}')"><div class="d"><span>${dn}</span><b>${dt2.getDate()}</b></div><div class="t"><b class="small">—</b></div></div>`; continue; }
+    const done=all.some(x=>(store.logs[x.id]||{}).completed||x.done);
+    const extra=(lifts2.length&&runs2.length)? ` <span class="small">+ ${lifts2.map(x=>esc(x.title.split(" - ")[0].split(" — ")[0])).join(" + ")}</span>`:"";
+    const swapped=all.some(x=>MV[x.id]);
+    const mloc=(store.logs[main.id]||{}).loc||null;
+    html+=`<div class="day" onclick="openDay('${d}')">
+      <div class="d"><span>${dn}</span><b>${dt2.getDate()}</b></div>
+      <div class="t"><b>${esc(main.title)}</b>${extra}
+      <p>${main.km?main.km+"km":""}${main.vert?" · "+main.vert+"m":""}${main.is_night?" · night":""}${swapped?" · ⇄ swapped":""}${mloc?" · "+(mloc==="tm"?"🏃 treadmill":"🌳 outside"):""}</p></div>
+      <div class="st">${done?"✓":d<t?"·":""}</div></div>`;
+  }
+  html+=`</div>`;
+  if(SESSIONS.some(s=>s.week===wk&&MV[s.id])) html+=`<button class="ghost" onclick="resetSwaps(${wk})">Reset this week's swaps</button>`;
+  return html;
+}
+function openDay(date){ tab="Today"; dayView=date; render(); window.scrollTo(0,0); }
+function rDayView(date){
+  const list=sessionsOn(date);
+  return `<h2 style="font-size:13px;color:var(--muted);margin:6px 2px">${new Date(date+"T12:00").toDateString()} — WEEK ${weekOf(date)}</h2>`
+    +list.map(s=>sessionCard(s,true)).join("")
+    +swapSection(date)
+    +`<button class="ghost" onclick="go('Week')">‹ Back to week</button>`;
+}
+function swapSection(date){
+  const wk=weekOf(date); if(wk<1||wk>NW) return "";
+  const monD=new Date(START+"T12:00"); monD.setDate(monD.getDate()+(wk-1)*7);
+  let btns="";
+  for(let i=0;i<7;i++){
+    const d=iso(new Date(monD.getTime()+i*864e5)); if(d===date) continue;
+    const alt=sessionsOn(d); const mt=alt.filter(x=>x.type!=="strength")[0]||alt[0];
+    const dn=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"][new Date(d+"T12:00").getDay()];
+    btns+=`<button class="ghost" style="margin:3px 5px 3px 0;font-size:12.5px" onclick="swapDays('${date}','${d}')">${dn} · ${mt?esc(mt.title.slice(0,24)):"rest"}</button>`;
+  }
+  return `<div class="card"><h2>Not feeling it? Swap this day</h2>
+    <p class="small" style="margin-bottom:7px">Swaps this whole day (runs + strength together) with another day this week. Weekly totals stay honest. Coach's one ask: keep at least one easy/rest day between the two quality sessions.</p>
+    <div>${btns}</div></div>`;
+}
+// ---------- Plan ----------
+function rPlan(){
+  const cur=Math.min(NW,Math.max(1,weekOf(todayISO())));
+  let html=`<div class="card"><h2>${ATHLETE.plan_title}</h2><div class="grid27">`;
+  for(let w=1;w<=NW;w++){ const m=WEEKS[w]; const a=weekActual(w);
+    html+=`<div class="wk ${w===cur?"cur":""}" onclick="planWk=${w};go('Week');planWk=${w};render()">
+      <div class="n">W${w}${m.down?" ↓":""}</div>
+      <div class="p" style="color:${phaseColor(m.phase)}">${esc(m.phase)}</div>
+      <div class="k">${m.km}km · ${m.vert}m</div>
+      ${a.km>0?`<div class="bar"><i style="width:${Math.min(100,100*a.km/m.km)}%"></i></div>`:""}
+      ${m.note?`<div class="small" style="font-size:10px;margin-top:2px">${esc(m.note.slice(0,42))}</div>`:""}
+    </div>`; }
+  html+=`</div></div>`;
+  html+=ATHLETE.milestones_html||"";
+  return html;
+}
+// ---------- Strength ----------
+function rStrength(){
+  const t=todayISO();
+  const next=SESSIONS.filter(s=>s.type==="strength"&&s.date>=t).slice(0,2);
+  const hist=SESSIONS.filter(s=>s.type==="strength"&&store.logs[s.id]&&store.logs[s.id].completed)
+    .map(s=>({s,l:store.logs[s.id]})).reverse().slice(0,12);
+  let html=next.map(s=>sessionCard(s)).join("");
+  html+=`<div class="card"><h2>Recent lifts</h2>${hist.length? `<table><tr><th>Date</th><th>Session</th><th>Loads / notes</th><th>RPE</th></tr>`+
+    hist.map(({s,l})=>`<tr><td>${s.date.slice(5)}</td><td>${esc(s.title.split("—")[0])}</td><td>${esc(l.notes||"")}</td><td>${l.rpe??""}</td></tr>`).join("")+`</table>`
+    : `<p class="small">Nothing logged yet. Log loads in the session card — last loads reappear here so progression is visible.</p>`}</div>`;
+  const exh=store.exh; const NAMES={}; SESSIONS.forEach(x=>(x.exercises||[]).forEach(e=>NAMES[e.k]=e.name));
+  const keys=Object.keys(exh).filter(k=>(exh[k]||[]).length);
+  html+=`<div class="card"><h2>Exercise progression</h2>`+(keys.length? keys.map(k=>{
+    const h=exh[k]; const loads=h.filter(x=>x.load!=null).map(x=>x.load);
+    const lastL=loads.length? loads[loads.length-1] : null;
+    const delta=loads.length>1? Math.round((loads[loads.length-1]-loads[0])*10)/10 : null;
+    return `<details class="exd"><summary>${esc(NAMES[k]||k)} ${sparkline(loads)}
+      <span style="margin-left:auto">${lastL!=null?`<b>${lastL}kg</b>`:`<span class="small">${h.length}x done</span>`}${delta!=null?` <span class="${delta>=0?"ok":"bad"}">${delta>=0?"+":""}${delta}</span>`:""}</span></summary>
+      <table><tr><th>Date</th><th>Load</th></tr>${h.slice().reverse().map(x=>`<tr><td>${x.date}</td><td>${x.load!=null? x.load+"kg":"done"}</td></tr>`).join("")}</table></details>`;
+  }).join("") : `<p class="small">Builds itself as you tick off lifts. Each exercise gets a load-over-time trend, the "am I moving up" view.</p>`)+`</div>`;
+  html+=`<div class="card"><h2>Loading rules</h2><details open><summary>Progression + elbow/back constraints</summary>
+    <ul><li>115kg is the plate ceiling. When 4x5 stops feeling heavy: 3s lowering + 2s pause, not load.</li>
+    <li>Effort is set by "reps in the tank": how many more reps you could have done before failing. Weeks 1-4: stop 3 short of failure. Heavy phase (from Wk5): stop 1-2 short. From Wk18: maintenance, stop 2-3 short. Never grind a rep on this program.</li>
+    <li>NO conventional deadlifts (back). NO barbell rows, chin-ups, skull crushers, heavy curls (elbow). Squat: high bar, wide grip, elbows down and back.</li>
+    <li>Deload in every down week: 2 sets, moderate. Last heavy lift W25. Nothing from W27.</li>
+    <li>Plyos (from W11): before lifting, Tuesdays only, never the day before Thursday terrain.</li></ul></details></div>`;
+  return html;
+}
+// ---------- Progress ----------
+function rProgress(){
+  return `<div class="card"><h2>Weekly volume — planned vs actual</h2>
+    <div class="legend"><span><i style="background:var(--s1)"></i>Actual km</span><span><i style="background:none;border:1.5px solid var(--axis)"></i>Planned km</span></div>
+    <div id="chVol"></div></div>
+  ${CHAIN?`<div class="card"><h2>${ATHLETE.tt_chart.title}</h2>
+    <div class="legend"><span><i style="background:var(--s1)"></i>Your TTs</span><span><i style="background:none;border:1.5px dashed var(--muted)"></i>${ATHLETE.tt_chart.legend}</span></div>
+    <div id="chTT"></div></div>`:""}
+  <div class="card"><h2>Zone discipline — time by intensity</h2>
+    <div class="legend"><span><i style="background:var(--z1)"></i>Z1 easy</span><span><i style="background:var(--z2)"></i>Z2 steady/threshold</span><span><i style="background:var(--z3)"></i>Z3 hard</span></div>
+    <div id="chZone"></div><p class="small" id="zoneNote"></p></div>
+  ${CHAIN?`<div class="card"><h2>Race predictor</h2><div id="chPred"></div></div>`:""}`;
+}
+function svgOpen(w,h){ return `<svg viewBox="0 0 ${w} ${h}" width="100%" style="display:block">`; }
+function drawCharts(){
+  const W=Math.min(820,$("#chVol").clientWidth||760), H=190, L=30, B=22;
+  const cur=Math.min(NW,Math.max(1,weekOf(todayISO())));
+  // volume chart
+  let max=60; const bw=(W-L-6)/NW;
+  let s=svgOpen(W,H);
+  for(const g of [0,20,40,60]){ const y=(H-B)-(H-B-8)*g/max;
+    s+=`<line x1="${L}" y1="${y}" x2="${W}" y2="${y}" stroke="var(--grid)" stroke-width="1"/><text x="${L-5}" y="${y+3}" font-size="9" fill="var(--muted)" text-anchor="end">${g}</text>`; }
+  for(let w=1;w<=NW;w++){ const m=WEEKS[w]; const a=weekActual(w);
+    const x=L+(w-1)*bw+1.5, wd=bw-3;
+    const ph=(H-B-8)*m.km/max, py=(H-B)-ph;
+    s+=`<rect x="${x}" y="${py}" width="${wd}" height="${ph}" rx="3" fill="none" stroke="var(--axis)" stroke-width="1" data-tip="W${w} planned ${m.km}km"/>`;
+    if(a.km>0){ const ah=(H-B-8)*Math.min(max,a.km)/max, ay=(H-B)-ah;
+      s+=`<rect x="${x+1.5}" y="${ay}" width="${Math.max(2,wd-3)}" height="${ah}" rx="3" fill="var(--s1)" data-tip="W${w} actual ${a.km.toFixed(1)}km / ${m.km} planned"/>`;
+      if(w===cur) s+=`<text x="${x+wd/2}" y="${ay-5}" font-size="10" font-weight="800" fill="var(--s1)" text-anchor="middle">${a.km.toFixed(1)}</text>`; }
+    if(w%5===0||w===1||w===NW) s+=`<text x="${x+wd/2}" y="${H-8}" font-size="9" fill="var(--muted)" text-anchor="middle">W${w}</text>`;
+    if(w===cur) s+=`<line x1="${x+wd/2}" y1="8" x2="${x+wd/2}" y2="14" stroke="var(--s2)" stroke-width="2"/>`;
+  }
+  s+=`<line x1="${L}" y1="${H-B}" x2="${W}" y2="${H-B}" stroke="var(--axis)"/></svg>`;
+  const curA=weekActual(cur), curM=WEEKS[cur];
+  $("#chVol").innerHTML=s+`<p class="small" style="margin-top:6px">Week ${cur} so far: <b style="color:var(--brand2)">${curA.km.toFixed(1)}</b> of ${curM.km}km (${Math.round(100*curA.km/curM.km)}%)${curA.vert?` · ${Math.round(curA.vert)}m vert`:""}</p>`;
+  // TT chart
+  if(CHAIN){ const TC=ATHLETE.tt_chart;
+  const tts=loggedTTs(); const mk=Object.entries(TT_MARKERS).map(([w,v])=>({w:+w,v}));
+  const wks=TC.wks; const x27=w=>L+ (W-L-14)*(w-1)/(NW-1);
+  const tmin=TC.tmin, tmax=TC.tmax; const yT=v=>14+(H-B-22)*(v-tmin)/(tmax-tmin);
+  let q=svgOpen(W,H);
+  for(const g of TC.grid){ const y=yT(g);
+    q+=`<line x1="${L}" y1="${y}" x2="${W}" y2="${y}" stroke="var(--grid)"/><text x="${L-5}" y="${y+3}" font-size="9" fill="var(--muted)" text-anchor="end">${fmtT(g)}</text>`; }
+  q+=`<path d="${mk.map((m,i)=>(i?"L":"M")+x27(m.w)+" "+yT(m.v)).join(" ")} L ${x27(NW)} ${yT(TC.final)}" fill="none" stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="5 4"/>`;
+  q+=`<circle cx="${x27(NW)}" cy="${yT(TC.final)}" r="5" fill="none" stroke="var(--muted)" stroke-width="1.5"/><text x="${x27(NW)-8}" y="${yT(TC.final)-8}" font-size="10" fill="var(--ink2)" text-anchor="end">21:30 → podium</text>`;
+  if(tts.length>1) q+=`<path d="${tts.map((t,i)=>(i?"L":"M")+x27(t.week)+" "+yT(t.secs)).join(" ")}" fill="none" stroke="var(--s1)" stroke-width="2"/>`;
+  for(const t of tts) q+=`<circle cx="${x27(t.week)}" cy="${yT(t.secs)}" r="5" fill="var(--s1)" stroke="var(--surface)" stroke-width="2" data-tip="W${t.week}: ${fmtT(t.secs)} (${t.label})"/><text x="${x27(t.week)}" y="${yT(t.secs)-10}" font-size="10" font-weight="600" fill="var(--ink)" text-anchor="middle">${fmtT(t.secs)}</text>`;
+  for(const w of wks) q+=`<text x="${x27(w)}" y="${H-6}" font-size="9" fill="var(--muted)" text-anchor="middle">${w===NW?"RACE":"W"+w}</text>`;
+  q+=`</svg>`;
+  $("#chTT").innerHTML=q; }
+  // zone stacked bars (last 8 weeks with data)
+  const zw=[]; for(let w=1;w<=Math.min(NW,cur);w++){ const z=zoneWeek(w); if(z.tot>0) zw.push({w,...z}); }
+  const zshow=zw.slice(-8);
+  if(zshow.length){
+    const bw2=Math.min(70,(W-L-10)/zshow.length); let z=svgOpen(W,120);
+    zshow.forEach((d,i)=>{ const x=L+i*bw2+3; let y=96; const hgt=80;
+      for(const [key,color] of [["z1","var(--z1)"],["z2","var(--z2)"],["z3","var(--z3)"]]){
+        const h=hgt*d[key]/d.tot; if(h>0){ z+=`<rect x="${x}" y="${y-h}" width="${bw2-8}" height="${Math.max(0,h-2)}" rx="3" fill="${color}" data-tip="W${d.w} ${key.toUpperCase()}: ${Math.round(100*d[key]/d.tot)}%"/>`; y-=h; } }
+      z+=`<text x="${x+(bw2-8)/2}" y="112" font-size="9" fill="var(--muted)" text-anchor="middle">W${d.w}</text>`;
+      const z1p=Math.round(100*d.z1/d.tot);
+      z+=`<text x="${x+(bw2-8)/2}" y="${96-82}" font-size="9" fill="${z1p<70?"var(--crit)":"var(--muted)"}" text-anchor="middle">${z1p}%</text>`;
+    });
+    z+=`</svg>`;
+    $("#chZone").innerHTML=z;
+    $("#zoneNote").textContent="Number above each bar = % easy. Target: 80% easy in every phase. Under 70% = grey-zone drift.";
+  } else $("#chZone").innerHTML=`<p class="small">Appears once synced runs are in. Estimated from pace/HR per activity.</p>`;
+  // predictor
+  const tt=latest5k();
+  if(CHAIN&&tt){ const [f10,bw3]=chain(tt.secs);
+    const rows=[["Current 5km",fmtT(tt.secs)],["→ Flat 10km equivalent",fmtT(f10)],["→ "+ATHLETE.race_name+" predicted",fmtT(bw3)],[ATHLETE.predictor.needs_label,ATHLETE.predictor.needs_text]];
+    $("#chPred").innerHTML=`<table>${rows.map(r=>`<tr><td>${r[0]}</td><td style="text-align:right"><b>${r[1]}</b></td></tr>`).join("")}</table>
+    <p class="small" style="margin-top:6px">${bw3<=ATHLETE.predictor.target_secs?ATHLETE.predictor.inside_text:ATHLETE.predictor.gap_prefix+fmtT(bw3-ATHLETE.predictor.target_secs)+ATHLETE.predictor.gap_suffix}</p>`; }
+  else if(CHAIN) $("#chPred").innerHTML=`<p class="small">Log a 5km TT to activate the predictor.</p>`;
+  // tooltips
+  document.querySelectorAll("[data-tip]").forEach(el=>{
+    el.addEventListener("mousemove",e=>tipShow(e,esc(el.dataset.tip)));
+    el.addEventListener("mouseleave",tipHide);
+    el.addEventListener("click",e=>{tipShow(e,esc(el.dataset.tip));setTimeout(tipHide,1800)});
+  });
+}
+function zoneWeek(wk){
+  // estimate zone time from synced activities: pace-based on flat, HR fallback
+  const mon=new Date(START+"T12:00"); mon.setDate(mon.getDate()+(wk-1)*7);
+  let z1=0,z2=0,z3=0;
+  for(let i=0;i<7;i++){ const d=iso(new Date(mon.getTime()+i*864e5));
+    for(const a of actsOn(d)){ if(!a.secs||!a.km) continue;
+      const pace=a.secs/a.km;
+      if(a.hr){ if(a.hr<ATHLETE.zone_est.hr1) z1+=a.secs; else if(a.hr<ATHLETE.zone_est.hr2) z2+=a.secs; else z3+=a.secs; }
+      else { if(pace>=ATHLETE.zone_est.pace1) z1+=a.secs; else if(pace>=ATHLETE.zone_est.pace2) z2+=a.secs; else z3+=a.secs; } } }
+  return {z1,z2,z3,tot:z1+z2+z3};
+}
+// ---------- Rules ----------
+function rRules(){
+  const rtRows = ATHLETE.route_order.map(k=>{
+    const r=ROUTES[k];
+    return `<div class="rtcard"><span class="rtico">${r.ico}</span><div><b>${esc(r.name)}</b><p>${esc(r.desc)}</p></div></div>`;
+  }).join("");
+  return ATHLETE.rules_html.replace("{{routes}}", rtRows);
+}
+
+// ---------- Intake (first open) ----------
+function rIntake(){
+  const q=ATHLETE.intake, a=store.intake.answers||{};
+  const field=(f)=>{
+    const v=esc(a[f.k]??"");
+    if(f.type==="textarea") return `<textarea id="iq_${f.k}" rows="3" style="width:100%">${v}</textarea>`;
+    if(f.type==="select") return `<select id="iq_${f.k}" style="width:100%">${["",...f.options].map(o=>`<option ${o===(a[f.k]??"")?"selected":""}>${esc(o)}</option>`).join("")}</select>`;
+    return `<input id="iq_${f.k}" style="width:100%" value="${v}" placeholder="${esc(f.ph||"")}">`;
+  };
+  return `<div class="card"><h2>${esc(q.title)}</h2><p class="small">${q.intro}</p></div>
+  ${q.sections.map(s=>`<div class="card"><h2>${esc(s.title)}</h2>${s.fields.map(f=>`<label class="f" style="display:block;margin-top:10px"><span style="display:block;margin-bottom:4px">${esc(f.label)}</span>${f.hint?`<span style="display:block;font-weight:500;letter-spacing:0;margin:-2px 0 4px;color:var(--muted)">${esc(f.hint)}</span>`:""}${field(f)}</label>`).join("")}</div>`).join("")}
+  <div class="card"><button class="btn" onclick="saveIntake()">${esc(q.submit||"Save my answers")}</button>
+  <p class="small" style="margin-top:8px">${q.after||""}</p></div>`;
+}
+function saveIntake(){
+  const q=ATHLETE.intake; const ans={};
+  for(const s of q.sections) for(const f of s.fields){ const el=$("#iq_"+f.k); if(el) ans[f.k]=el.value.trim(); }
+  const missing=q.sections.flatMap(s=>s.fields).filter(f=>f.req&&!ans[f.k]);
+  if(missing.length){ toast("Missing: "+missing.map(f=>f.label).join(", ")); return; }
+  store.intake={done:true,answers:ans,at:Date.now()}; render(); toast("Saved. Now send it to your coach."); shareIntake();
+}
+function intakeText(){
+  const q=ATHLETE.intake, a=store.intake.answers||{};
+  return `INTAKE — ${ATHLETE.name}\n`+q.sections.map(s=>`\n## ${s.title}\n`+s.fields.map(f=>`${f.label}: ${a[f.k]||"-"}`).join("\n")).join("\n");
+}
+async function shareIntake(){
+  const text=intakeText();
+  if(navigator.share){ try{ await navigator.share({title:"Intake — "+ATHLETE.name, text}); return; }catch(e){} }
+  try{ await navigator.clipboard.writeText(text); toast("Copied. Paste it to your coach."); }catch(e){ alert(text); }
+}
+function editIntake(){ const i=store.intake; i.done=false; store.intake=i; go("Today"); }
+function intakeSummaryCard(){
+  if(!ATHLETE.intake) return "";
+  const i=store.intake;
+  if(!i.done) return `<div class="card"><h2>Your intake</h2><p class="small">Not filled in yet. It is on the Today tab.</p></div>`;
+  return `<div class="card"><h2>Your intake</h2><p class="small">Saved ${new Date(i.at).toLocaleDateString()}.</p>
+  <div class="row" style="margin-top:8px"><button class="btn" onclick="shareIntake()">Send to coach</button><button class="ghost" onclick="editIntake()">Edit answers</button></div></div>`;
+}
+// ---------- Sync ----------
+function rSync(){
+  const c=store.cfg;
+  return `<div class="card"><h2>intervals.icu sync</h2>
+  <p class="small">One-time setup: create a free <b>intervals.icu</b> account → Settings → connect <b>${ATHLETE.device}</b> → scroll to <b>Developer Settings</b> → copy your <b>API key</b> and <b>Athlete ID</b> (looks like i123456).</p>
+  <div class="row" style="margin-top:8px">
+    <label class="f">Athlete ID<input id="aid" value="${esc(c.aid||"")}" placeholder="i123456"></label>
+    <label class="f">API key<input id="akey" type="password" value="${esc(c.key||"")}"></label>
+    <button class="btn" onclick="saveCfg()">Save</button>
+  </div>
+  <div class="row" style="margin-top:10px">
+    <button class="btn" onclick="syncNow()" ${c.key?"":"disabled"}>Sync now</button>
+    <span class="small" id="syncmsg">${c.last?("Last sync: "+new Date(c.last).toLocaleString()+" · "+store.acts.length+" runs"):"Never synced"}</span>
+  </div></div>
+  ${ATHLETE.setup_html||""}${intakeSummaryCard()}<div class="card"><h2>Backup / move devices</h2>
+  <div class="row"><button class="ghost" onclick="expData()">Export logs (JSON)</button>
+  <label class="ghost" style="cursor:pointer">Import<input type="file" class="hide" onchange="impData(event)"></label>
+  </div>
+  <p class="small" style="margin-top:6px">Logs live in this browser. Export before moving devices; synced ${ATHLETE.device} data re-pulls anywhere.</p></div>`;
+}
+function saveCfg(){ const c=store.cfg; c.aid=$("#aid").value.trim(); c.key=$("#akey").value.trim(); store.cfg=c; render(); toast("Settings saved"); }
+async function syncNow(){
+  const c=store.cfg; const msg=$("#syncmsg"); if(msg) msg.textContent="Syncing…";
+  const auth="Basic "+btoa("API_KEY:"+c.key);
+  try{
+    const end=todayISO();
+    const r=await fetch(`https://intervals.icu/api/v1/athlete/${encodeURIComponent(c.aid)}/activities?oldest=${START}&newest=${end}`,{headers:{Authorization:auth}});
+    if(!r.ok) throw new Error("activities "+r.status);
+    const acts=await r.json();
+    const mapped = acts.filter(a=>a.type&&/run/i.test(a.type)).map(a=>({
+      id:a.id, date:(a.start_date_local||"").slice(0,10), run:true,
+      km:(a.distance||0)/1000, secs:a.moving_time||a.elapsed_time||0,
+      vert:a.total_elevation_gain||a.icu_climb||0, hr:a.average_heartrate||null, name:a.name||"Run"}));
+    // guard: Garmin + Strava can both deliver the same run — drop same-day near-identical duplicates
+    const kept=[];
+    for(const a of mapped){
+      const dup=kept.find(b=>b.date===a.date && Math.abs(b.km-a.km)<Math.max(0.25,0.05*a.km) && Math.abs((b.secs||0)-(a.secs||0))<150);
+      if(!dup) kept.push(a);
+    }
+    store.acts = kept;
+    let wellCount=0;
+    try{
+      const rw=await fetch(`https://intervals.icu/api/v1/athlete/${encodeURIComponent(c.aid)}/wellness?oldest=${START}&newest=${end}`,{headers:{Authorization:auth}});
+      if(rw.ok){ const wl=await rw.json();
+        store.well=(Array.isArray(wl)?wl:[]).map(w=>({date:w.id||w.date, restingHR:w.restingHR||null, hrv:w.hrv||null, sleep:w.sleepSecs? w.sleepSecs/3600 : (w.sleepHours||null)})).filter(w=>w.date);
+        wellCount=store.well.length; }
+    }catch(e){}
+    c.last=Date.now(); store.cfg=c;
+    if(msg) msg.textContent=`Synced: ${store.acts.length} runs, ${wellCount} wellness days.`;
+    setTimeout(render,900);
+  }catch(err){
+    if(msg) msg.innerHTML=`<span class="bad">Sync failed (${esc(err.message)}).</span> Check athlete ID + API key. If it persists, the browser may be blocking the request — tell Claude and we'll wire the fallback.`;
+  }
+}
+function expData(){
+  const blob=new Blob([JSON.stringify({logs:store.logs,str:store.str,cfg:{aid:store.cfg.aid}},null,1)],{type:"application/json"});
+  const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=ATHLETE.slug+"-logs.json"; a.click();
+}
+function impData(ev){
+  const f=ev.target.files[0]; if(!f)return; const rd=new FileReader();
+  rd.onload=()=>{ try{ const d=JSON.parse(rd.result); if(d.logs) store.logs=d.logs; if(d.str) store.str=d.str; render(); }catch(e){ alert("Bad file"); } };
+  rd.readAsText(f);
+}
+$("#hdr").innerHTML=ATHLETE.header_html;
+render();
+if(location.protocol.startsWith("http") && "serviceWorker" in navigator){ try{navigator.serviceWorker.register("sw.js");}catch(e){} }
+// auto-sync on open if configured and stale (>3h)
+const SYNC_COOLDOWN = 20*60e3;   // 20 min. Garmin takes a few minutes to reach intervals.icu,
+                                 // so a 3h cooldown used to hide a run for the rest of the morning.
+function maybeSync(force){
+  const c=store.cfg;
+  if(!c.key||!c.aid) return;
+  if(force || !c.last || Date.now()-c.last > SYNC_COOLDOWN){ try{ syncNow(); }catch(e){} }
+}
+maybeSync();
+document.addEventListener("visibilitychange", ()=>{ if(!document.hidden) maybeSync(); });
+window.addEventListener("focus", ()=>maybeSync());
+</script>
+</body>
+</html>
