@@ -258,6 +258,23 @@ button.lib span{color:var(--muted);font-size:11px}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .toast b{color:var(--brand);margin-right:6px}
 .btn.saved{background:var(--good);border-color:var(--good);color:#fff}
+.ck{margin-top:12px;padding:12px;border-radius:14px;background:var(--surface2);border:1px solid var(--border)}
+.ck h4{margin:0 0 2px;font-size:14px}
+.ck .cklead{font-size:12px;color:var(--muted);margin:0 0 10px}
+.ck .cklbl{display:block;font-size:10px;font-weight:800;letter-spacing:.06em;color:var(--muted);margin:10px 0 5px}
+.ckchips{display:flex;flex-wrap:wrap;gap:5px}
+.ckchip{flex:0 0 auto;min-width:34px;padding:7px 9px;border-radius:10px;border:1px solid var(--border);
+  background:var(--surface);color:var(--ink2);font-size:13px;font-weight:700;cursor:pointer}
+.ckchip.on{background:var(--brand);border-color:var(--brand);color:#fff}
+.ckfeel .ckchip{flex:1 1 0;min-width:0}
+.ckchip.g.on{background:var(--good);border-color:var(--good);color:#10231a}
+.ckchip.a.on{background:var(--warn);border-color:var(--warn);color:#2a2205}
+.ckchip.r.on{background:var(--crit);border-color:var(--crit);color:#fff}
+.ck textarea{width:100%;box-sizing:border-box;margin-top:5px;min-height:92px;resize:vertical;
+  padding:10px;border-radius:10px;border:1px solid var(--border);background:var(--surface);
+  color:var(--ink);font:inherit;font-size:14px;line-height:1.45}
+.ck .ckbtns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.ck .ckbtns .btn{flex:1 1 150px}
 </style>
 </head>
 <body>
@@ -279,17 +296,17 @@ const SESSIONS = [
   "is_night": false,
   "is_test": false,
   "is_race": false,
-  "km": 2.8,
+  "km": 2.5,
   "vert": 0,
   "type": "easy",
-  "title": "Walk-jog 1: 6 x (1 min jog / 2 min walk)",
-  "prescription": "PROVISIONAL starter. About 28 minutes on the treadmill at 0.5-1% incline. Walk 5 minutes, then 6 times: jog 1 min at a shuffle you could talk through, walk 2 min. Walk 5 minutes to finish. Jog around 7.5 km/h on the belt, walk around 5.5 km/h. Shin score out of 10 during, and again tomorrow morning, both go in the notes. Two clean sessions in a row before the next step up.",
+  "title": "Walk-jog 1: 5 x (1 min jog / 2 min walk)",
+  "prescription": "START GATE: only begin once you have had two days in a row of walking with no shin pain and no ache the next morning. If that is not true yet, everything slides by a few days and nothing is lost. About 25 minutes on the treadmill at 0.5-1% incline. Walk 5 minutes, then 5 times: jog 1 min at a shuffle you could talk through, walk 2 min. Walk 5 minutes to finish. Jog around 7.5 km/h on the belt, walk around 5.5 km/h. CADENCE: Aim for about 150 steps a minute while you are jogging. Your watch had you around 140 at the quickest last time. Shorter, quicker steps, landing under you rather than out in front. Set a metronome app to 150 or find music at 150bpm and run to it. Do not lengthen your stride to keep up with it, just turn the legs over quicker and let the speed be whatever it is. This is the single cheapest thing you can do for the shins. Shin score out of 10 during, and again the next morning, both go in the check-in at the bottom of this card. Step up to the next session only if the last TWO left the shins quiet next morning. If not, repeat this one. Say how the right knee felt too.",
   "id": 1,
   "route": "belt",
-  "route_note": "Treadmill. If two sessions in a row have left the shins quiet next morning, the same timings can go outside on flat footpath.",
-  "opt_out": "Outside version: identical timings on flat footpath from home. Orthotics in. No camber, no sand yet.",
+  "route_note": "Treadmill. Stay on the belt while the shins are settling.",
+  "opt_out": "Outside version: identical timings on flat footpath from home. Orthotics in. No road camber, no soft sand yet.",
   "opt_tm": "This is the treadmill version already.",
-  "hr_note": "No heart-rate target in Phase 0. The test is the talk test: full sentences on every jog. The numbers come once a few weeks of watch data are in.",
+  "hr_note": "Your podiatrist wants the intensity low, around 150-160 as a ceiling rather than something to aim for. The talk test is the one that decides it: full sentences on every jog. If the watch is over 160 at a shuffle, slow the belt.||Two things about that number. Heart rate lags, so on short jog intervals it often peaks 20-30 seconds AFTER the jog stops, during the walk. Judge it on the walk numbers too. And a treadmill has no airflow, so heat pushes your heart rate up on its own: your last run climbed from 140 in the first km to 154 in the third at the same pace. Put a fan on yourself, open a window, and have water on the belt. You will hold a lower number at the same effort.",
   "wu": {
    "mins": 5,
    "items": [
@@ -347,174 +364,10 @@ const SESSIONS = [
   "is_race": false,
   "km": 0,
   "vert": 0,
-  "type": "rest",
-  "title": "Rest + band stretch",
-  "prescription": "Band calf stretch, straight knee then bent knee, 30 seconds each, both sides, morning and evening. A 20-30 minute walk is fine and good. No jogging. ",
-  "id": 2
- },
- {
-  "week": 1,
-  "phase": "0 Shins",
-  "date": "2026-09-16",
-  "day": "Wed",
-  "is_down": false,
-  "is_night": false,
-  "is_test": false,
-  "is_race": false,
-  "km": 3.1,
-  "vert": 0,
-  "type": "easy",
-  "title": "Walk-jog 2: 7 x (1 min jog / 2 min walk)",
-  "prescription": "PROVISIONAL starter. About 31 minutes on the treadmill at 0.5-1% incline. Walk 5 minutes, then 7 times: jog 1 min at a shuffle you could talk through, walk 2 min. Walk 5 minutes to finish. Jog around 7.5 km/h on the belt, walk around 5.5 km/h. Shin score out of 10 during, and again tomorrow morning, both go in the notes. Two clean sessions in a row before the next step up.",
-  "id": 3,
-  "route": "belt",
-  "route_note": "Treadmill. If two sessions in a row have left the shins quiet next morning, the same timings can go outside on flat footpath.",
-  "opt_out": "Outside version: identical timings on flat footpath from home. Orthotics in. No camber, no sand yet.",
-  "opt_tm": "This is the treadmill version already.",
-  "hr_note": "No heart-rate target in Phase 0. The test is the talk test: full sentences on every jog. The numbers come once a few weeks of watch data are in.",
-  "wu": {
-   "mins": 5,
-   "items": [
-    [
-     "Walk 5 minutes",
-     "",
-     "The first five minutes of every session are a walk. That IS the warm-up. Brisk by the end of it."
-    ],
-    [
-     "Ankle circles",
-     "10 each way, each foot",
-     "Standing on one leg, hand on the treadmill rail, draw slow circles with the toes."
-    ],
-    [
-     "Heel raises, two feet",
-     "10 slow",
-     "Up onto the toes over two seconds, down over two. Wakes the calves up gently before they work."
-    ]
-   ]
-  },
-  "cd": {
-   "mins": 6,
-   "items": [
-    [
-     "Walk 5 minutes",
-     "",
-     "Do not stop dead. Walk until breathing is normal and the legs feel ordinary."
-    ],
-    [
-     "Band calf stretch, straight knee",
-     "30s each side",
-     "Sit, leg straight, band round the ball of the foot, pull the toes toward you until the big calf muscle pulls."
-    ],
-    [
-     "Band calf stretch, bent knee",
-     "30s each side",
-     "Same, with the knee slightly bent. Moves the stretch lower into the calf, which is the bit that pulls on the shin."
-    ],
-    [
-     "Ice if the shins spoke up",
-     "15 min",
-     "Wrapped, straight after. Skip it on a quiet day."
-    ]
-   ]
-  }
- },
- {
-  "week": 1,
-  "phase": "0 Shins",
-  "date": "2026-09-17",
-  "day": "Thu",
-  "is_down": false,
-  "is_night": false,
-  "is_test": false,
-  "is_race": false,
-  "km": 0,
-  "vert": 0,
-  "type": "rest",
-  "title": "Rest + band stretch",
-  "prescription": "Band calf stretch, straight knee then bent knee, 30 seconds each, both sides, morning and evening. A 20-30 minute walk is fine and good. No jogging. ",
-  "id": 4
- },
- {
-  "week": 1,
-  "phase": "0 Shins",
-  "date": "2026-09-18",
-  "day": "Fri",
-  "is_down": false,
-  "is_night": false,
-  "is_test": false,
-  "is_race": false,
-  "km": 3.1,
-  "vert": 0,
-  "type": "easy",
-  "title": "Walk-jog 3: 6 x (1.5 min jog / 2 min walk)",
-  "prescription": "PROVISIONAL starter. About 31.0 minutes on the treadmill at 0.5-1% incline. Walk 5 minutes, then 6 times: jog 1.5 min at a shuffle you could talk through, walk 2 min. Walk 5 minutes to finish. Jog around 7.5 km/h on the belt, walk around 5.5 km/h. Shin score out of 10 during, and again tomorrow morning, both go in the notes. Two clean sessions in a row before the next step up.",
-  "id": 5,
-  "route": "belt",
-  "route_note": "Treadmill. If two sessions in a row have left the shins quiet next morning, the same timings can go outside on flat footpath.",
-  "opt_out": "Outside version: identical timings on flat footpath from home. Orthotics in. No camber, no sand yet.",
-  "opt_tm": "This is the treadmill version already.",
-  "hr_note": "No heart-rate target in Phase 0. The test is the talk test: full sentences on every jog. The numbers come once a few weeks of watch data are in.",
-  "wu": {
-   "mins": 5,
-   "items": [
-    [
-     "Walk 5 minutes",
-     "",
-     "The first five minutes of every session are a walk. That IS the warm-up. Brisk by the end of it."
-    ],
-    [
-     "Ankle circles",
-     "10 each way, each foot",
-     "Standing on one leg, hand on the treadmill rail, draw slow circles with the toes."
-    ],
-    [
-     "Heel raises, two feet",
-     "10 slow",
-     "Up onto the toes over two seconds, down over two. Wakes the calves up gently before they work."
-    ]
-   ]
-  },
-  "cd": {
-   "mins": 6,
-   "items": [
-    [
-     "Walk 5 minutes",
-     "",
-     "Do not stop dead. Walk until breathing is normal and the legs feel ordinary."
-    ],
-    [
-     "Band calf stretch, straight knee",
-     "30s each side",
-     "Sit, leg straight, band round the ball of the foot, pull the toes toward you until the big calf muscle pulls."
-    ],
-    [
-     "Band calf stretch, bent knee",
-     "30s each side",
-     "Same, with the knee slightly bent. Moves the stretch lower into the calf, which is the bit that pulls on the shin."
-    ],
-    [
-     "Ice if the shins spoke up",
-     "15 min",
-     "Wrapped, straight after. Skip it on a quiet day."
-    ]
-   ]
-  }
- },
- {
-  "week": 1,
-  "phase": "0 Shins",
-  "date": "2026-09-19",
-  "day": "Sat",
-  "is_down": false,
-  "is_night": false,
-  "is_test": false,
-  "is_race": false,
-  "km": 0,
-  "vert": 0,
   "type": "strength",
   "title": "Shin strength 1",
-  "prescription": "Bodyweight only, about 15 minutes. These are the muscles that take load off the shin bone. Slow and controlled beats more reps. Skip anything the podiatrist has said not to do, and say so in the notes.",
-  "id": 6,
+  "id": 2,
+  "prescription": "Bodyweight only, about 15 minutes, the day after a run on purpose. These are the muscles that take load off the shin bone, and loading them is the treatment, not the risk. Slow and controlled beats more reps. Nothing here should make the shins or the right knee sharp. If it does, stop that exercise and say so in the check-in.",
   "exercises": [
    {
     "k": "tibraise",
@@ -601,6 +454,170 @@ const SESSIONS = [
  {
   "week": 1,
   "phase": "0 Shins",
+  "date": "2026-09-16",
+  "day": "Wed",
+  "is_down": false,
+  "is_night": false,
+  "is_test": false,
+  "is_race": false,
+  "km": 0,
+  "vert": 0,
+  "type": "rest",
+  "title": "Rest + band stretch",
+  "id": 3,
+  "prescription": "Band calf stretch, straight knee then bent knee, 30 seconds each, both sides, morning and evening. A 20-30 minute walk is fine and good for you. No jogging."
+ },
+ {
+  "week": 1,
+  "phase": "0 Shins",
+  "date": "2026-09-17",
+  "day": "Thu",
+  "is_down": false,
+  "is_night": false,
+  "is_test": false,
+  "is_race": false,
+  "km": 2.8,
+  "vert": 0,
+  "type": "easy",
+  "title": "Walk-jog 2: 6 x (1 min jog / 2 min walk)",
+  "prescription": "About 28 minutes on the treadmill at 0.5-1% incline. Walk 5 minutes, then 6 times: jog 1 min at a shuffle you could talk through, walk 2 min. Walk 5 minutes to finish. Jog around 7.5 km/h on the belt, walk around 5.5 km/h. CADENCE: Aim for about 150 steps a minute while you are jogging. Your watch had you around 140 at the quickest last time. Shorter, quicker steps, landing under you rather than out in front. Set a metronome app to 150 or find music at 150bpm and run to it. Do not lengthen your stride to keep up with it, just turn the legs over quicker and let the speed be whatever it is. This is the single cheapest thing you can do for the shins. Shin score out of 10 during, and again the next morning, both go in the check-in at the bottom of this card. Step up to the next session only if the last TWO left the shins quiet next morning. If not, repeat this one. Say how the right knee felt too.",
+  "id": 4,
+  "route": "belt",
+  "route_note": "Treadmill. Stay on the belt while the shins are settling.",
+  "opt_out": "Outside version: identical timings on flat footpath from home. Orthotics in. No road camber, no soft sand yet.",
+  "opt_tm": "This is the treadmill version already.",
+  "hr_note": "Your podiatrist wants the intensity low, around 150-160 as a ceiling rather than something to aim for. The talk test is the one that decides it: full sentences on every jog. If the watch is over 160 at a shuffle, slow the belt.||Two things about that number. Heart rate lags, so on short jog intervals it often peaks 20-30 seconds AFTER the jog stops, during the walk. Judge it on the walk numbers too. And a treadmill has no airflow, so heat pushes your heart rate up on its own: your last run climbed from 140 in the first km to 154 in the third at the same pace. Put a fan on yourself, open a window, and have water on the belt. You will hold a lower number at the same effort.",
+  "wu": {
+   "mins": 5,
+   "items": [
+    [
+     "Walk 5 minutes",
+     "",
+     "The first five minutes of every session are a walk. That IS the warm-up. Brisk by the end of it."
+    ],
+    [
+     "Ankle circles",
+     "10 each way, each foot",
+     "Standing on one leg, hand on the treadmill rail, draw slow circles with the toes."
+    ],
+    [
+     "Heel raises, two feet",
+     "10 slow",
+     "Up onto the toes over two seconds, down over two. Wakes the calves up gently before they work."
+    ]
+   ]
+  },
+  "cd": {
+   "mins": 6,
+   "items": [
+    [
+     "Walk 5 minutes",
+     "",
+     "Do not stop dead. Walk until breathing is normal and the legs feel ordinary."
+    ],
+    [
+     "Band calf stretch, straight knee",
+     "30s each side",
+     "Sit, leg straight, band round the ball of the foot, pull the toes toward you until the big calf muscle pulls."
+    ],
+    [
+     "Band calf stretch, bent knee",
+     "30s each side",
+     "Same, with the knee slightly bent. Moves the stretch lower into the calf, which is the bit that pulls on the shin."
+    ],
+    [
+     "Ice if the shins spoke up",
+     "15 min",
+     "Wrapped, straight after. Skip it on a quiet day."
+    ]
+   ]
+  }
+ },
+ {
+  "week": 1,
+  "phase": "0 Shins",
+  "date": "2026-09-18",
+  "day": "Fri",
+  "is_down": false,
+  "is_night": false,
+  "is_test": false,
+  "is_race": false,
+  "km": 0,
+  "vert": 0,
+  "type": "rest",
+  "title": "Rest + band stretch",
+  "id": 5,
+  "prescription": "Band calf stretch, straight knee then bent knee, 30 seconds each, both sides, morning and evening. A 20-30 minute walk is fine and good for you. No jogging."
+ },
+ {
+  "week": 1,
+  "phase": "0 Shins",
+  "date": "2026-09-19",
+  "day": "Sat",
+  "is_down": false,
+  "is_night": false,
+  "is_test": false,
+  "is_race": false,
+  "km": 3.1,
+  "vert": 0,
+  "type": "easy",
+  "title": "Walk-jog 3: 7 x (1 min jog / 2 min walk)",
+  "prescription": "About 31 minutes on the treadmill at 0.5-1% incline. Walk 5 minutes, then 7 times: jog 1 min at a shuffle you could talk through, walk 2 min. Walk 5 minutes to finish. Jog around 7.5 km/h on the belt, walk around 5.5 km/h. CADENCE: Aim for about 150 steps a minute while you are jogging. Your watch had you around 140 at the quickest last time. Shorter, quicker steps, landing under you rather than out in front. Set a metronome app to 150 or find music at 150bpm and run to it. Do not lengthen your stride to keep up with it, just turn the legs over quicker and let the speed be whatever it is. This is the single cheapest thing you can do for the shins. Shin score out of 10 during, and again the next morning, both go in the check-in at the bottom of this card. Step up to the next session only if the last TWO left the shins quiet next morning. If not, repeat this one. Say how the right knee felt too.",
+  "id": 6,
+  "route": "belt",
+  "route_note": "Treadmill. Both of this week's earlier sessions clean? Then this one can go outside on flat footpath, with Mitch if he is about.",
+  "opt_out": "Outside version: identical timings on flat footpath from home. Orthotics in. No road camber, no soft sand yet.",
+  "opt_tm": "This is the treadmill version already.",
+  "hr_note": "Your podiatrist wants the intensity low, around 150-160 as a ceiling rather than something to aim for. The talk test is the one that decides it: full sentences on every jog. If the watch is over 160 at a shuffle, slow the belt.||Two things about that number. Heart rate lags, so on short jog intervals it often peaks 20-30 seconds AFTER the jog stops, during the walk. Judge it on the walk numbers too. And a treadmill has no airflow, so heat pushes your heart rate up on its own: your last run climbed from 140 in the first km to 154 in the third at the same pace. Put a fan on yourself, open a window, and have water on the belt. You will hold a lower number at the same effort.",
+  "wu": {
+   "mins": 5,
+   "items": [
+    [
+     "Walk 5 minutes",
+     "",
+     "The first five minutes of every session are a walk. That IS the warm-up. Brisk by the end of it."
+    ],
+    [
+     "Ankle circles",
+     "10 each way, each foot",
+     "Standing on one leg, hand on the treadmill rail, draw slow circles with the toes."
+    ],
+    [
+     "Heel raises, two feet",
+     "10 slow",
+     "Up onto the toes over two seconds, down over two. Wakes the calves up gently before they work."
+    ]
+   ]
+  },
+  "cd": {
+   "mins": 6,
+   "items": [
+    [
+     "Walk 5 minutes",
+     "",
+     "Do not stop dead. Walk until breathing is normal and the legs feel ordinary."
+    ],
+    [
+     "Band calf stretch, straight knee",
+     "30s each side",
+     "Sit, leg straight, band round the ball of the foot, pull the toes toward you until the big calf muscle pulls."
+    ],
+    [
+     "Band calf stretch, bent knee",
+     "30s each side",
+     "Same, with the knee slightly bent. Moves the stretch lower into the calf, which is the bit that pulls on the shin."
+    ],
+    [
+     "Ice if the shins spoke up",
+     "15 min",
+     "Wrapped, straight after. Skip it on a quiet day."
+    ]
+   ]
+  }
+ },
+ {
+  "week": 1,
+  "phase": "0 Shins",
   "date": "2026-09-20",
   "day": "Sun",
   "is_down": false,
@@ -610,9 +627,9 @@ const SESSIONS = [
   "km": 0,
   "vert": 0,
   "type": "rest",
-  "title": "Rest, walk, stretch",
-  "prescription": "Band calf stretch, straight knee then bent knee, 30 seconds each, both sides, morning and evening. A 20-30 minute walk is fine and good. No jogging. Sunday walk with the family counts.",
-  "id": 7
+  "title": "Rest + band stretch",
+  "id": 7,
+  "prescription": "Band calf stretch, straight knee then bent knee, 30 seconds each, both sides, morning and evening. A 20-30 minute walk is fine and good for you. No jogging."
  },
  {
   "week": 2,
@@ -623,17 +640,17 @@ const SESSIONS = [
   "is_night": false,
   "is_test": false,
   "is_race": false,
-  "km": 3.5,
+  "km": 3.1,
   "vert": 0,
   "type": "easy",
-  "title": "Walk-jog 4: 7 x (1.5 min jog / 2 min walk)",
-  "prescription": "PROVISIONAL starter. About 34.5 minutes on the treadmill at 0.5-1% incline. Walk 5 minutes, then 7 times: jog 1.5 min at a shuffle you could talk through, walk 2 min. Walk 5 minutes to finish. Jog around 7.5 km/h on the belt, walk around 5.5 km/h. Shin score out of 10 during, and again tomorrow morning, both go in the notes. Two clean sessions in a row before the next step up.",
+  "title": "Walk-jog 4: 6 x (1.5 min jog / 2 min walk)",
+  "prescription": "About 31 minutes on the treadmill at 0.5-1% incline. Walk 5 minutes, then 6 times: jog 1.5 min at a shuffle you could talk through, walk 2 min. Walk 5 minutes to finish. Jog around 7.5 km/h on the belt, walk around 5.5 km/h. CADENCE: Aim for about 150 steps a minute while you are jogging. Your watch had you around 140 at the quickest last time. Shorter, quicker steps, landing under you rather than out in front. Set a metronome app to 150 or find music at 150bpm and run to it. Do not lengthen your stride to keep up with it, just turn the legs over quicker and let the speed be whatever it is. This is the single cheapest thing you can do for the shins. Shin score out of 10 during, and again the next morning, both go in the check-in at the bottom of this card. Step up to the next session only if the last TWO left the shins quiet next morning. If not, repeat this one. Say how the right knee felt too.",
   "id": 8,
   "route": "belt",
-  "route_note": "Treadmill. If two sessions in a row have left the shins quiet next morning, the same timings can go outside on flat footpath.",
-  "opt_out": "Outside version: identical timings on flat footpath from home. Orthotics in. No camber, no sand yet.",
+  "route_note": "Treadmill. Stay on the belt while the shins are settling.",
+  "opt_out": "Outside version: identical timings on flat footpath from home. Orthotics in. No road camber, no soft sand yet.",
   "opt_tm": "This is the treadmill version already.",
-  "hr_note": "No heart-rate target in Phase 0. The test is the talk test: full sentences on every jog. The numbers come once a few weeks of watch data are in.",
+  "hr_note": "Your podiatrist wants the intensity low, around 150-160 as a ceiling rather than something to aim for. The talk test is the one that decides it: full sentences on every jog. If the watch is over 160 at a shuffle, slow the belt.||Two things about that number. Heart rate lags, so on short jog intervals it often peaks 20-30 seconds AFTER the jog stops, during the walk. Judge it on the walk numbers too. And a treadmill has no airflow, so heat pushes your heart rate up on its own: your last run climbed from 140 in the first km to 154 in the third at the same pace. Put a fan on yourself, open a window, and have water on the belt. You will hold a lower number at the same effort.",
   "wu": {
    "mins": 5,
    "items": [
@@ -691,174 +708,10 @@ const SESSIONS = [
   "is_race": false,
   "km": 0,
   "vert": 0,
-  "type": "rest",
-  "title": "Rest + band stretch",
-  "prescription": "Band calf stretch, straight knee then bent knee, 30 seconds each, both sides, morning and evening. A 20-30 minute walk is fine and good. No jogging. ",
-  "id": 9
- },
- {
-  "week": 2,
-  "phase": "0 Shins",
-  "date": "2026-09-23",
-  "day": "Wed",
-  "is_down": false,
-  "is_night": false,
-  "is_test": false,
-  "is_race": false,
-  "km": 3.5,
-  "vert": 0,
-  "type": "easy",
-  "title": "Walk-jog 5: 6 x (2 min jog / 2 min walk)",
-  "prescription": "PROVISIONAL starter. About 34 minutes on the treadmill at 0.5-1% incline. Walk 5 minutes, then 6 times: jog 2 min at a shuffle you could talk through, walk 2 min. Walk 5 minutes to finish. Jog around 7.5 km/h on the belt, walk around 5.5 km/h. Shin score out of 10 during, and again tomorrow morning, both go in the notes. Two clean sessions in a row before the next step up.",
-  "id": 10,
-  "route": "belt",
-  "route_note": "Treadmill. If two sessions in a row have left the shins quiet next morning, the same timings can go outside on flat footpath.",
-  "opt_out": "Outside version: identical timings on flat footpath from home. Orthotics in. No camber, no sand yet.",
-  "opt_tm": "This is the treadmill version already.",
-  "hr_note": "No heart-rate target in Phase 0. The test is the talk test: full sentences on every jog. The numbers come once a few weeks of watch data are in.",
-  "wu": {
-   "mins": 5,
-   "items": [
-    [
-     "Walk 5 minutes",
-     "",
-     "The first five minutes of every session are a walk. That IS the warm-up. Brisk by the end of it."
-    ],
-    [
-     "Ankle circles",
-     "10 each way, each foot",
-     "Standing on one leg, hand on the treadmill rail, draw slow circles with the toes."
-    ],
-    [
-     "Heel raises, two feet",
-     "10 slow",
-     "Up onto the toes over two seconds, down over two. Wakes the calves up gently before they work."
-    ]
-   ]
-  },
-  "cd": {
-   "mins": 6,
-   "items": [
-    [
-     "Walk 5 minutes",
-     "",
-     "Do not stop dead. Walk until breathing is normal and the legs feel ordinary."
-    ],
-    [
-     "Band calf stretch, straight knee",
-     "30s each side",
-     "Sit, leg straight, band round the ball of the foot, pull the toes toward you until the big calf muscle pulls."
-    ],
-    [
-     "Band calf stretch, bent knee",
-     "30s each side",
-     "Same, with the knee slightly bent. Moves the stretch lower into the calf, which is the bit that pulls on the shin."
-    ],
-    [
-     "Ice if the shins spoke up",
-     "15 min",
-     "Wrapped, straight after. Skip it on a quiet day."
-    ]
-   ]
-  }
- },
- {
-  "week": 2,
-  "phase": "0 Shins",
-  "date": "2026-09-24",
-  "day": "Thu",
-  "is_down": false,
-  "is_night": false,
-  "is_test": false,
-  "is_race": false,
-  "km": 0,
-  "vert": 0,
-  "type": "rest",
-  "title": "Rest + band stretch",
-  "prescription": "Band calf stretch, straight knee then bent knee, 30 seconds each, both sides, morning and evening. A 20-30 minute walk is fine and good. No jogging. ",
-  "id": 11
- },
- {
-  "week": 2,
-  "phase": "0 Shins",
-  "date": "2026-09-25",
-  "day": "Fri",
-  "is_down": false,
-  "is_night": false,
-  "is_test": false,
-  "is_race": false,
-  "km": 4.0,
-  "vert": 0,
-  "type": "easy",
-  "title": "Walk-jog 6: 7 x (2 min jog / 2 min walk)",
-  "prescription": "PROVISIONAL starter. About 38 minutes on the treadmill at 0.5-1% incline. Walk 5 minutes, then 7 times: jog 2 min at a shuffle you could talk through, walk 2 min. Walk 5 minutes to finish. Jog around 7.5 km/h on the belt, walk around 5.5 km/h. Shin score out of 10 during, and again tomorrow morning, both go in the notes. Two clean sessions in a row before the next step up.",
-  "id": 12,
-  "route": "belt",
-  "route_note": "Treadmill. If two sessions in a row have left the shins quiet next morning, the same timings can go outside on flat footpath.",
-  "opt_out": "Outside version: identical timings on flat footpath from home. Orthotics in. No camber, no sand yet.",
-  "opt_tm": "This is the treadmill version already.",
-  "hr_note": "No heart-rate target in Phase 0. The test is the talk test: full sentences on every jog. The numbers come once a few weeks of watch data are in.",
-  "wu": {
-   "mins": 5,
-   "items": [
-    [
-     "Walk 5 minutes",
-     "",
-     "The first five minutes of every session are a walk. That IS the warm-up. Brisk by the end of it."
-    ],
-    [
-     "Ankle circles",
-     "10 each way, each foot",
-     "Standing on one leg, hand on the treadmill rail, draw slow circles with the toes."
-    ],
-    [
-     "Heel raises, two feet",
-     "10 slow",
-     "Up onto the toes over two seconds, down over two. Wakes the calves up gently before they work."
-    ]
-   ]
-  },
-  "cd": {
-   "mins": 6,
-   "items": [
-    [
-     "Walk 5 minutes",
-     "",
-     "Do not stop dead. Walk until breathing is normal and the legs feel ordinary."
-    ],
-    [
-     "Band calf stretch, straight knee",
-     "30s each side",
-     "Sit, leg straight, band round the ball of the foot, pull the toes toward you until the big calf muscle pulls."
-    ],
-    [
-     "Band calf stretch, bent knee",
-     "30s each side",
-     "Same, with the knee slightly bent. Moves the stretch lower into the calf, which is the bit that pulls on the shin."
-    ],
-    [
-     "Ice if the shins spoke up",
-     "15 min",
-     "Wrapped, straight after. Skip it on a quiet day."
-    ]
-   ]
-  }
- },
- {
-  "week": 2,
-  "phase": "0 Shins",
-  "date": "2026-09-26",
-  "day": "Sat",
-  "is_down": false,
-  "is_night": false,
-  "is_test": false,
-  "is_race": false,
-  "km": 0,
-  "vert": 0,
   "type": "strength",
   "title": "Shin strength 2",
-  "prescription": "Bodyweight only, about 15 minutes. These are the muscles that take load off the shin bone. Slow and controlled beats more reps. Skip anything the podiatrist has said not to do, and say so in the notes.",
-  "id": 13,
+  "id": 9,
+  "prescription": "Bodyweight only, about 15 minutes, the day after a run on purpose. These are the muscles that take load off the shin bone, and loading them is the treatment, not the risk. Slow and controlled beats more reps. Nothing here should make the shins or the right knee sharp. If it does, stop that exercise and say so in the check-in.",
   "exercises": [
    {
     "k": "tibraise",
@@ -945,6 +798,170 @@ const SESSIONS = [
  {
   "week": 2,
   "phase": "0 Shins",
+  "date": "2026-09-23",
+  "day": "Wed",
+  "is_down": false,
+  "is_night": false,
+  "is_test": false,
+  "is_race": false,
+  "km": 0,
+  "vert": 0,
+  "type": "rest",
+  "title": "Rest + band stretch",
+  "id": 10,
+  "prescription": "Band calf stretch, straight knee then bent knee, 30 seconds each, both sides, morning and evening. A 20-30 minute walk is fine and good for you. No jogging."
+ },
+ {
+  "week": 2,
+  "phase": "0 Shins",
+  "date": "2026-09-24",
+  "day": "Thu",
+  "is_down": false,
+  "is_night": false,
+  "is_test": false,
+  "is_race": false,
+  "km": 3.5,
+  "vert": 0,
+  "type": "easy",
+  "title": "Walk-jog 5: 7 x (1.5 min jog / 2 min walk)",
+  "prescription": "About 34 minutes on the treadmill at 0.5-1% incline. Walk 5 minutes, then 7 times: jog 1.5 min at a shuffle you could talk through, walk 2 min. Walk 5 minutes to finish. Jog around 7.5 km/h on the belt, walk around 5.5 km/h. CADENCE: Aim for about 150 steps a minute while you are jogging. Your watch had you around 140 at the quickest last time. Shorter, quicker steps, landing under you rather than out in front. Set a metronome app to 150 or find music at 150bpm and run to it. Do not lengthen your stride to keep up with it, just turn the legs over quicker and let the speed be whatever it is. This is the single cheapest thing you can do for the shins. Shin score out of 10 during, and again the next morning, both go in the check-in at the bottom of this card. Step up to the next session only if the last TWO left the shins quiet next morning. If not, repeat this one. Say how the right knee felt too.",
+  "id": 11,
+  "route": "belt",
+  "route_note": "Treadmill. Stay on the belt while the shins are settling.",
+  "opt_out": "Outside version: identical timings on flat footpath from home. Orthotics in. No road camber, no soft sand yet.",
+  "opt_tm": "This is the treadmill version already.",
+  "hr_note": "Your podiatrist wants the intensity low, around 150-160 as a ceiling rather than something to aim for. The talk test is the one that decides it: full sentences on every jog. If the watch is over 160 at a shuffle, slow the belt.||Two things about that number. Heart rate lags, so on short jog intervals it often peaks 20-30 seconds AFTER the jog stops, during the walk. Judge it on the walk numbers too. And a treadmill has no airflow, so heat pushes your heart rate up on its own: your last run climbed from 140 in the first km to 154 in the third at the same pace. Put a fan on yourself, open a window, and have water on the belt. You will hold a lower number at the same effort.",
+  "wu": {
+   "mins": 5,
+   "items": [
+    [
+     "Walk 5 minutes",
+     "",
+     "The first five minutes of every session are a walk. That IS the warm-up. Brisk by the end of it."
+    ],
+    [
+     "Ankle circles",
+     "10 each way, each foot",
+     "Standing on one leg, hand on the treadmill rail, draw slow circles with the toes."
+    ],
+    [
+     "Heel raises, two feet",
+     "10 slow",
+     "Up onto the toes over two seconds, down over two. Wakes the calves up gently before they work."
+    ]
+   ]
+  },
+  "cd": {
+   "mins": 6,
+   "items": [
+    [
+     "Walk 5 minutes",
+     "",
+     "Do not stop dead. Walk until breathing is normal and the legs feel ordinary."
+    ],
+    [
+     "Band calf stretch, straight knee",
+     "30s each side",
+     "Sit, leg straight, band round the ball of the foot, pull the toes toward you until the big calf muscle pulls."
+    ],
+    [
+     "Band calf stretch, bent knee",
+     "30s each side",
+     "Same, with the knee slightly bent. Moves the stretch lower into the calf, which is the bit that pulls on the shin."
+    ],
+    [
+     "Ice if the shins spoke up",
+     "15 min",
+     "Wrapped, straight after. Skip it on a quiet day."
+    ]
+   ]
+  }
+ },
+ {
+  "week": 2,
+  "phase": "0 Shins",
+  "date": "2026-09-25",
+  "day": "Fri",
+  "is_down": false,
+  "is_night": false,
+  "is_test": false,
+  "is_race": false,
+  "km": 0,
+  "vert": 0,
+  "type": "rest",
+  "title": "Rest + band stretch",
+  "id": 12,
+  "prescription": "Band calf stretch, straight knee then bent knee, 30 seconds each, both sides, morning and evening. A 20-30 minute walk is fine and good for you. No jogging."
+ },
+ {
+  "week": 2,
+  "phase": "0 Shins",
+  "date": "2026-09-26",
+  "day": "Sat",
+  "is_down": false,
+  "is_night": false,
+  "is_test": false,
+  "is_race": false,
+  "km": 3.5,
+  "vert": 0,
+  "type": "easy",
+  "title": "Walk-jog 6: 6 x (2 min jog / 2 min walk)",
+  "prescription": "About 34 minutes on the treadmill at 0.5-1% incline. Walk 5 minutes, then 6 times: jog 2 min at a shuffle you could talk through, walk 2 min. Walk 5 minutes to finish. Jog around 7.5 km/h on the belt, walk around 5.5 km/h. CADENCE: Aim for about 150 steps a minute while you are jogging. Your watch had you around 140 at the quickest last time. Shorter, quicker steps, landing under you rather than out in front. Set a metronome app to 150 or find music at 150bpm and run to it. Do not lengthen your stride to keep up with it, just turn the legs over quicker and let the speed be whatever it is. This is the single cheapest thing you can do for the shins. Shin score out of 10 during, and again the next morning, both go in the check-in at the bottom of this card. Step up to the next session only if the last TWO left the shins quiet next morning. If not, repeat this one. Say how the right knee felt too.",
+  "id": 13,
+  "route": "belt",
+  "route_note": "Treadmill. Both of this week's earlier sessions clean? Then this one can go outside on flat footpath, with Mitch if he is about.",
+  "opt_out": "Outside version: identical timings on flat footpath from home. Orthotics in. No road camber, no soft sand yet.",
+  "opt_tm": "This is the treadmill version already.",
+  "hr_note": "Your podiatrist wants the intensity low, around 150-160 as a ceiling rather than something to aim for. The talk test is the one that decides it: full sentences on every jog. If the watch is over 160 at a shuffle, slow the belt.||Two things about that number. Heart rate lags, so on short jog intervals it often peaks 20-30 seconds AFTER the jog stops, during the walk. Judge it on the walk numbers too. And a treadmill has no airflow, so heat pushes your heart rate up on its own: your last run climbed from 140 in the first km to 154 in the third at the same pace. Put a fan on yourself, open a window, and have water on the belt. You will hold a lower number at the same effort.",
+  "wu": {
+   "mins": 5,
+   "items": [
+    [
+     "Walk 5 minutes",
+     "",
+     "The first five minutes of every session are a walk. That IS the warm-up. Brisk by the end of it."
+    ],
+    [
+     "Ankle circles",
+     "10 each way, each foot",
+     "Standing on one leg, hand on the treadmill rail, draw slow circles with the toes."
+    ],
+    [
+     "Heel raises, two feet",
+     "10 slow",
+     "Up onto the toes over two seconds, down over two. Wakes the calves up gently before they work."
+    ]
+   ]
+  },
+  "cd": {
+   "mins": 6,
+   "items": [
+    [
+     "Walk 5 minutes",
+     "",
+     "Do not stop dead. Walk until breathing is normal and the legs feel ordinary."
+    ],
+    [
+     "Band calf stretch, straight knee",
+     "30s each side",
+     "Sit, leg straight, band round the ball of the foot, pull the toes toward you until the big calf muscle pulls."
+    ],
+    [
+     "Band calf stretch, bent knee",
+     "30s each side",
+     "Same, with the knee slightly bent. Moves the stretch lower into the calf, which is the bit that pulls on the shin."
+    ],
+    [
+     "Ice if the shins spoke up",
+     "15 min",
+     "Wrapped, straight after. Skip it on a quiet day."
+    ]
+   ]
+  }
+ },
+ {
+  "week": 2,
+  "phase": "0 Shins",
   "date": "2026-09-27",
   "day": "Sun",
   "is_down": false,
@@ -954,25 +971,25 @@ const SESSIONS = [
   "km": 0,
   "vert": 0,
   "type": "rest",
-  "title": "Rest, walk, stretch",
-  "prescription": "Band calf stretch, straight knee then bent knee, 30 seconds each, both sides, morning and evening. A 20-30 minute walk is fine and good. No jogging. End of the starter fortnight. Send the coach the two-week picture: shin scores, what stepped up, what got repeated.",
-  "id": 14
+  "title": "Rest + band stretch",
+  "id": 14,
+  "prescription": "Band calf stretch, straight knee then bent knee, 30 seconds each, both sides, morning and evening. A 20-30 minute walk is fine and good for you. No jogging."
  }
 ];
 const WEEKS = {
  "1": {
   "phase": "0 Shins",
-  "km": 9,
+  "km": 8.4,
   "vert": 0,
   "down": false,
-  "note": "PROVISIONAL starter. Walk-jog x3, every second day"
+  "note": "Mon run, Tue shin strength, Thu run, Sat run. Never two run days back to back."
  },
  "2": {
   "phase": "0 Shins",
-  "km": 11,
+  "km": 10.1,
   "vert": 0,
   "down": false,
-  "note": "Step up only after two clean sessions"
+  "note": "Same shape. Step up only after two clean sessions, otherwise repeat the step."
  },
  "3": {
   "phase": "0 Shins",
@@ -1233,7 +1250,7 @@ const ATHLETE = {
   "pace2": 400
  },
  "milestones_html": "<div class=\"card\"><h2>The shape of it (provisional)</h2><table><tr><th>When</th><th>What</th></tr>\n  <tr><td>W1-4 · Sep-Oct</td><td>Phase 0: walk-jog every second day, shins settle, orthotics bed in</td></tr>\n  <tr><td>W5-8 · Oct-Nov</td><td>Phase 1: jog 5km without stopping, still only every second day</td></tr>\n  <tr><td>W9-16 · Nov-Dec</td><td>Phase 2: the long walk-run grows, one a week, up to about 14km by Christmas</td></tr>\n  <tr><td>W17-21 · Jan-Feb</td><td>Phase 3: trail and hills with Mitch, longest walk-run about 16-17km</td></tr>\n  <tr><td>W22-24 · Feb</td><td>Phase 4: taper, pack, fly</td></tr>\n  <tr><td><b>Sat 27 Feb</b></td><td><b>takayna trail 22km · Waratah, Tasmania · get round, raise the money</b></td></tr></table>\n  <p class=\"small\" style=\"margin-top:6px\">Weeks 3 to 24 are placeholders. They get written week by week off what the shins actually do.</p></div>",
- "rules_html": "<div class=\"card\"><h2>How this app works</h2>\n  <div class=\"rtcard\"><span class=\"rtico\">&#128207;</span><div><b>Every km on a card is the whole session</b><p>Walking and jogging both count. The number is the total distance you will cover, warm-up walk to cool-down walk.</p></div></div>\n  <div class=\"rtcard\"><span class=\"rtico\">&#9997;&#65039;</span><div><b>Log every session, especially the bad ones</b><p>Tick it done, put the shin score (0-10) in the notes, and what it felt like the next morning. That is what the plan gets adjusted on.</p></div></div>\n  <div class=\"rtcard\"><span class=\"rtico\">&#128172;</span><div><b>Tell the coach after each session</b><p>A text to Mitch with how it went is enough: what you did, shin score during, shin score next morning. The plan changes off that, not off what was written weeks ago.</p></div></div>\n  <div class=\"rtcard\"><span class=\"rtico\">&#9203;</span><div><b>Everything past Week 2 is a placeholder</b><p>The first fortnight is real. The rest of the calendar is the shape of the build, and gets written properly once your intake answers and the first two weeks of data are in.</p></div></div></div>\n\n<div class=\"card\"><h2>Phase 0: settle the shins first</h2>\n  <p class=\"small\">The podiatrist said low intensity and build the volume from there. This phase is that, written down.</p>\n  <div class=\"rtcard\"><span class=\"rtico\">&#128694;</span><div><b>Walk-jog only, every second day</b><p>Short jogs with longer walks between them. Never two run days back to back in Phase 0. The day between is when the bone adapts.</p></div></div>\n  <div class=\"rtcard\"><span class=\"rtico\">&#127939;</span><div><b>The jog is a shuffle</b><p>Slow enough to speak full sentences. Short, quick steps, feet landing under you. Long strides load the shin. If you cannot talk, that is not Phase 0 pace.</p></div></div>\n  <div class=\"rtcard\"><span class=\"rtico\">&#128200;</span><div><b>Step up only after two clean sessions</b><p>The next session gets longer jogs only when the previous TWO left the shins quiet the next morning. One clean session is not enough. If in doubt, repeat the step.</p></div></div>\n  <div class=\"rtcard\"><span class=\"rtico\">&#127947;&#65039;</span><div><b>No leg-based classes in Phase 0</b><p>HIIT, jump-based or plyometric classes are what tipped the shins over last time. Upper body, swimming, bike, and the shin-strength session in this app are all fine.</p></div></div>\n  <div class=\"rtcard\"><span class=\"rtico\">&#129525;</span><div><b>The band stretch, twice a day</b><p>Sit with the leg straight, loop the band round the ball of the foot, pull the toes toward you until the calf pulls. 30 seconds, then bend the knee slightly and hold another 30. Each side. Morning, and after every session.</p></div></div>\n  <div class=\"rtcard\"><span class=\"rtico\">&#129482;</span><div><b>Ice after any session where the shins spoke up</b><p>15 minutes, wrapped, straight after. Not needed on a quiet day.</p></div></div>\n  <div class=\"rtcard\"><span class=\"rtico\">&#129406;</span><div><b>Orthotics and shoes</b><p>Wear the orthotics in every session from the day you get them, including the walks. Note in the log which shoes you wore. Two pairs rotated is better than one once the volume goes up.</p></div></div></div>\n\n<div class=\"card\"><h2>Shin traffic light</h2>\n  <div class=\"verdict\"><span class=\"dot\" style=\"background:var(--good)\"></span><div><b>Green: 0-2 out of 10 during, gone by the next morning</b><p>Carry on as written. Log it.</p></div></div>\n  <div class=\"verdict\"><span class=\"dot\" style=\"background:var(--warn)\"></span><div><b>Amber: 3-4 during, or a dull ache still there next morning</b><p>Finish the session walking. Repeat this step next time instead of stepping up. Band stretch and ice. Two ambers in a row means an extra rest day and tell the coach.</p></div></div>\n  <div class=\"verdict\"><span class=\"dot\" style=\"background:var(--crit)\"></span><div><b>Red: 5+, pain walking, hopping on one leg hurts, ONE spot on the bone you can press that is tender, or it aches at night</b><p>Stop. No jogging until the podiatrist has looked at it. Those last three are the signs it might be more than shin splints, and that gets checked, not trained through.</p></div></div>\n  <p class=\"small\" style=\"margin-top:8px\">These are the standard return-to-running rules for shin pain. The podiatrist's instructions override anything here.</p></div>\n\n<div class=\"card\"><h2>Where to run</h2>{{routes}}</div>\n\n<div class=\"card\"><h2>Setup checklist</h2><details open><summary>One-time, in this order</summary>\n  <ul><li>☐ Fill in the intake on the Today tab and press Send to coach</li>\n  <li>☐ Record every session with the Apple Watch <b>Workout</b> app (Indoor Run on the treadmill, Outdoor Run outside)</li>\n  <li>☐ Install Strava, create a free account. In Strava: Settings → Manage Apps and Devices → Health → turn on <b>Automatic Uploads</b>. Runs then land in Strava on their own</li>\n  <li>☐ Create a free <b>intervals.icu</b> account and connect Strava to it (Settings → Strava)</li>\n  <li>☐ In intervals.icu Settings, scroll to Developer Settings, copy the API key and Athlete ID into this app's Sync tab. Do this on the phone; it stays on the phone</li>\n  <li>☐ Fundraising page link saved somewhere you can find it</li></ul></details></div>",
+ "rules_html": "<div class=\"card\"><h2>How this app works</h2>\n  <div class=\"rtcard\"><span class=\"rtico\">&#128207;</span><div><b>Every km on a card is the whole session</b><p>Walking and jogging both count. The number is the total distance you will cover, warm-up walk to cool-down walk.</p></div></div>\n  <div class=\"rtcard\"><span class=\"rtico\">&#9997;&#65039;</span><div><b>Log every session, especially the bad ones</b><p>Tick it done, put the shin score (0-10) in the notes, and what it felt like the next morning. That is what the plan gets adjusted on.</p></div></div>\n  <div class=\"rtcard\"><span class=\"rtico\">&#128172;</span><div><b>Tell the coach after each session</b><p>Scroll to the bottom of the session card and fill in the check-in: how it felt, shin score during, shin score next morning, and anything else worth saying. Press Send to coach and it goes to Mitch as a text. The plan changes off that, not off what was written weeks ago.</p></div></div>\n  <div class=\"rtcard\"><span class=\"rtico\">&#9203;</span><div><b>Everything past Week 2 is a placeholder</b><p>The first fortnight is real. The rest of the calendar is the shape of the build, and gets written properly once your intake answers and the first two weeks of data are in.</p></div></div></div>\n\n<div class=\"card\"><h2>Phase 0: settle the shins first</h2>\n  <p class=\"small\">The podiatrist said low intensity and build the volume from there. This phase is that, written down.</p>\n  <div class=\"rtcard\"><span class=\"rtico\">&#128694;</span><div><b>Mon run, Tue strength, Thu run, Sat run</b><p>Short jogs with longer walks between them. Never two run days back to back in Phase 0. The day between is when the bone adapts. The Tuesday strength session is deliberately the day after a run.</p></div></div>\n  <div class=\"rtcard\"><span class=\"rtico\">&#127939;</span><div><b>The jog is a shuffle</b><p>Slow enough to speak full sentences. Short, quick steps, feet landing under you. Long strides load the shin. If you cannot talk, that is not Phase 0 pace.</p></div></div>\n  <div class=\"rtcard\"><span class=\"rtico\">&#127925;</span><div><b>About 150 steps a minute</b><p>Short, quick steps beat long ones. Your watch had you around 140 at the quickest, and nudging that up is the cheapest thing you can do for the shins: less bounce, less time on the ground, less load through the bone each step. Metronome app on 150, or music at 150bpm. Do not stretch your stride to match it, just turn over quicker and let the speed be whatever it is.</p></div></div>\n  <div class=\"rtcard\"><span class=\"rtico\">&#128200;</span><div><b>Step up only after two clean sessions</b><p>The next session gets longer jogs only when the previous TWO left the shins quiet the next morning. One clean session is not enough. If in doubt, repeat the step.</p></div></div>\n  <div class=\"rtcard\"><span class=\"rtico\">&#127947;&#65039;</span><div><b>No leg-based classes in Phase 0</b><p>HIIT, jump-based or plyometric classes are what tipped the shins over last time. Upper body, swimming, bike, and the shin-strength session in this app are all fine.</p></div></div>\n  <div class=\"rtcard\"><span class=\"rtico\">&#129525;</span><div><b>The band stretch, twice a day</b><p>Sit with the leg straight, loop the band round the ball of the foot, pull the toes toward you until the calf pulls. 30 seconds, then bend the knee slightly and hold another 30. Each side. Morning, and after every session.</p></div></div>\n  <div class=\"rtcard\"><span class=\"rtico\">&#129482;</span><div><b>Ice after any session where the shins spoke up</b><p>15 minutes, wrapped, straight after. Not needed on a quiet day.</p></div></div>\n  <div class=\"rtcard\"><span class=\"rtico\">&#129406;</span><div><b>Orthotics and shoes</b><p>Wear the orthotics in every session from the day you get them, including the walks. Note in the log which shoes you wore. Two pairs rotated is better than one once the volume goes up.</p></div></div></div>\n\n<div class=\"card\"><h2>Shin traffic light</h2>\n  <div class=\"verdict\"><span class=\"dot\" style=\"background:var(--good)\"></span><div><b>Green: 0-2 out of 10 during, gone by the next morning</b><p>Carry on as written. Log it.</p></div></div>\n  <div class=\"verdict\"><span class=\"dot\" style=\"background:var(--warn)\"></span><div><b>Amber: 3-4 during, or a dull ache still there next morning</b><p>Finish the session walking. Repeat this step next time instead of stepping up. Band stretch and ice. Two ambers in a row means an extra rest day and tell the coach.</p></div></div>\n  <div class=\"verdict\"><span class=\"dot\" style=\"background:var(--crit)\"></span><div><b>Red: 5+, pain walking, hopping on one leg hurts, ONE spot on the bone you can press that is tender, or it aches at night</b><p>Stop. No jogging until the podiatrist has looked at it. Those last three are the signs it might be more than shin splints, and that gets checked, not trained through.</p></div></div>\n  <p class=\"small\" style=\"margin-top:8px\">These are the standard return-to-running rules for shin pain. The podiatrist's instructions override anything here.</p></div>\n\n<div class=\"card\"><h2>Where to run</h2>{{routes}}</div>\n\n<div class=\"card\"><h2>Setup checklist</h2><details open><summary>One-time, in this order</summary>\n  <ul><li>☐ Fill in the intake on the Today tab and press Send to coach</li>\n  <li>☐ Record every session with the Apple Watch <b>Workout</b> app (Indoor Run on the treadmill, Outdoor Run outside)</li>\n  <li>☐ Install Strava, create a free account. In Strava: Settings → Manage Apps and Devices → Health → turn on <b>Automatic Uploads</b>. Runs then land in Strava on their own</li>\n  <li>☐ Create a free <b>intervals.icu</b> account and connect Strava to it (Settings → Strava)</li>\n  <li>☐ In intervals.icu Settings, scroll to Developer Settings, copy the API key and Athlete ID into this app's Sync tab. Do this on the phone; it stays on the phone</li>\n  <li>☐ Fundraising page link saved somewhere you can find it</li></ul></details></div>",
  "events": [
   {
    "name": "takayna trail",
@@ -1417,7 +1434,32 @@ const ATHLETE = {
    }
   ]
  },
- "setup_html": "<div class=\"card\"><h2>Apple Watch → this app</h2>\n  <p class=\"small\">Apple Watch runs reach this app through Strava then intervals.icu. Once set up it is automatic.</p>\n  <ol class=\"small\" style=\"margin:8px 0 0 18px;line-height:1.7\">\n  <li>Record runs with the Apple Watch <b>Workout</b> app (Indoor Run or Outdoor Run).</li>\n  <li>Strava app → Settings → Manage Apps and Devices → Health → <b>Automatic Uploads</b> on.</li>\n  <li>intervals.icu → Settings → connect <b>Strava</b>.</li>\n  <li>intervals.icu → Settings → Developer Settings → copy the API key and Athlete ID into the boxes above.</li></ol></div>"
+ "setup_html": "<div class=\"card\"><h2>Apple Watch → this app</h2>\n  <p class=\"small\">Apple Watch runs reach this app through Strava then intervals.icu. Once set up it is automatic.</p>\n  <ol class=\"small\" style=\"margin:8px 0 0 18px;line-height:1.7\">\n  <li>Record runs with the Apple Watch <b>Workout</b> app (Indoor Run or Outdoor Run).</li>\n  <li>Strava app → Settings → Manage Apps and Devices → Health → <b>Automatic Uploads</b> on.</li>\n  <li>intervals.icu → Settings → connect <b>Strava</b>.</li>\n  <li>intervals.icu → Settings → Developer Settings → copy the API key and Athlete ID into the boxes above.</li></ol></div>",
+ "checkin": {
+  "title": "How did that go?",
+  "lead": "Two numbers and a few words. Scores are 0 = nothing, 10 = worst it has been. This is what the plan gets changed off, so the honest version is the useful one. Come back the next morning and fill in the morning score.",
+  "feel_label": "HOW IT FELT",
+  "feel": [
+   "Tough",
+   "OK",
+   "Good",
+   "Great"
+  ],
+  "scales": [
+   {
+    "k": "shin",
+    "label": "SHINS DURING"
+   },
+   {
+    "k": "shinam",
+    "label": "SHINS NEXT MORNING"
+   }
+  ],
+  "note_label": "ANYTHING ELSE",
+  "note_hint": "How the shins and the knee felt, how you slept, the shoes, whether you could talk the whole way, anything that was different. A couple of lines is plenty.",
+  "send": "Send to coach",
+  "share_title": "takayna check-in — Jess"
+ }
 };
 const NW = ATHLETE.weeks, SP = ATHLETE.store_prefix;
 const START = ATHLETE.start, RACE = ATHLETE.race;
@@ -1702,7 +1744,7 @@ function sessionCard(s, expanded){
     ${rtBlock}
     ${locBlock}
     <details class="fullpres"><summary>Full detail</summary><p class="pres">${esc(s.prescription)}</p></details>
-    ${wucd(s.wu,"Warm-up","↗","wu")}${logForm}${wucd(s.cd,"Cool-down","↘","cdd")}${actHtml}</div>`;
+    ${wucd(s.wu,"Warm-up","↗","wu")}${logForm}${wucd(s.cd,"Cool-down","↘","cdd")}${actHtml}${checkinBlock(s,l)}</div>`;
 }
 function rContent(){
   const wk=Math.min(NW,Math.max(1,weekOf(todayISO())));
@@ -1783,6 +1825,65 @@ function setLoc(id,v){
   l.loc = (l.loc===v) ? null : v;
   logs[id]=l; store.logs=logs; render();
   toast(l.loc? (v==="tm"?"Treadmill":"Outside") : "Location cleared");
+}
+// ---------- session check-in (athlete.checkin) ----------
+function ckScale(id, key, val){
+  const n=11, cur=val;
+  let out="";
+  for(let i=0;i<n;i++){
+    const cls = i<=2 ? "g" : (i<=4 ? "a" : "r");
+    out += `<button class="ckchip ${cls} ${cur===i?"on":""}" onclick="setCk(${id},'${key}',${i})">${i}</button>`;
+  }
+  return `<div class="ckchips">${out}</div>`;
+}
+function checkinBlock(s,l){
+  const C=ATHLETE.checkin;
+  if(!C || s.type==="rest") return "";
+  const c=l.checkin||{};
+  const feels=C.feel||["Tough","OK","Good"];
+  const feelBtns=feels.map(f=>`<button class="ckchip ${c.feel===f?"on":""}" onclick="setCk(${s.id},'feel','${esc(f)}')">${esc(f)}</button>`).join("");
+  return `<div class="ck">
+    <h4>${esc(C.title||"How did that go?")}</h4>
+    <p class="cklead">${esc(C.lead||"")}</p>
+    <span class="cklbl">${esc(C.feel_label||"HOW DID IT FEEL")}</span>
+    <div class="ckchips ckfeel">${feelBtns}</div>
+    ${(C.scales||[]).map(sc=>`<span class="cklbl">${esc(sc.label)}</span>${ckScale(s.id,sc.k,c[sc.k])}`).join("")}
+    <span class="cklbl">${esc(C.note_label||"ANYTHING ELSE")}</span>
+    <textarea id="ck${s.id}" placeholder="${esc(C.note_hint||"")}" oninput="setCkNote(${s.id},this.value)">${esc(c.note||"")}</textarea>
+    <div class="ckbtns">
+      <button class="btn" onclick="shareCheckin(${s.id})">${esc(C.send||"Send to coach")}</button>
+    </div>
+  </div>`;
+}
+function setCk(id,key,val){
+  const logs=store.logs; const l=logs[id]||{}; const c=l.checkin||{};
+  c[key] = (c[key]===val) ? null : val;
+  l.checkin=c; l.at=new Date().toISOString(); logs[id]=l; store.logs=logs; render();
+}
+function setCkNote(id,val){
+  const logs=store.logs; const l=logs[id]||{}; const c=l.checkin||{};
+  c.note=val; l.checkin=c; logs[id]=l; store.logs=logs;
+}
+function checkinText(id){
+  const s=SESSIONS.find(x=>x.id===id); if(!s) return "";
+  const l=store.logs[id]||{}; const c=l.checkin||{};
+  const C=ATHLETE.checkin||{};
+  const d=new Date(s.date+"T00:00:00");
+  const day=d.toLocaleDateString(undefined,{weekday:"short",day:"numeric",month:"short"});
+  const lines=[`${ATHLETE.first.toUpperCase()} · ${day}`, s.title];
+  const did=[l.km?l.km+"km":null, l.time?fmtT(l.time):null, l.hr?l.hr+"bpm avg":null, l.rpe?"RPE "+l.rpe+"/10":null].filter(Boolean);
+  lines.push(did.length? "Did: "+did.join(" · ") : "Did: not logged in the app yet");
+  if(c.feel) lines.push((C.feel_label||"Felt")+": "+c.feel);
+  for(const sc of (C.scales||[])) if(c[sc.k]!=null) lines.push(sc.label+": "+c[sc.k]+"/10");
+  lines.push("", (c.note||"").trim() || "(no notes)");
+  return lines.join("\n");
+}
+async function shareCheckin(id){
+  const el=$("#ck"+id); if(el) setCkNote(id, el.value);
+  const text=checkinText(id);
+  const title=(ATHLETE.checkin&&ATHLETE.checkin.share_title)||("Check-in — "+ATHLETE.name);
+  if(navigator.share){ try{ await navigator.share({title, text}); toast("Sent to coach"); return; }catch(e){ if(e&&e.name==="AbortError") return; } }
+  try{ await navigator.clipboard.writeText(text); toast("Copied. Paste it to your coach."); }catch(e){ alert(text); }
 }
 function saveLog(id){
   const logs=store.logs; const l=logs[id]||{};
