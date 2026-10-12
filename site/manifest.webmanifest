@@ -1,0 +1,22 @@
+{
+  "name": "takayna 2027 \u2014 Jess",
+  "short_name": "takayna",
+  "description": "Jess's takayna trail training app",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#1D2720",
+  "theme_color": "#1D2720",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
